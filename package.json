@@ -1,0 +1,13 @@
+{
+  "name": "yourwaymortgage-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Static website for The Heichel Team at Fairway Home Mortgage (yourwaymortgage.com)",
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs",
+    "serve": "npx --yes http-server dist -p 8080 -e html -c-1",
+    "dev": "node build.mjs && npm run serve"
+  },
+  "engines": { "node": ">=18" }
+}
