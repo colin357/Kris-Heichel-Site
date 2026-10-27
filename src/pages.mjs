@@ -88,11 +88,11 @@ function home() {
     <span class="eyebrow">Get notified when rates drop</span>
     <p>Get notified when it’s the right time to refinance. Smart alerts based on your current loan and goals.</p>
   </div>
-  <div>${form('refi-watchlist-home', [
+  <div class="card refi-card">${form('refi-watchlist-home', [
     { name: 'name', label: 'Name', required: true, half: true, autocomplete: 'name' },
     { name: 'email', label: 'Email', type: 'email', required: true, half: true, autocomplete: 'email' },
     { name: 'current_rate', label: 'Current Rate', type: 'select', options: RATE_OPTIONS, required: true },
-  ], { submit: 'Join The List', btnClass: 'btn-gold' })}</div>
+  ], { submit: 'Join The List', btnClass: 'btn-gold', note: 'No spam. We’ll only reach out when a refinance could save you money.' })}</div>
 </div></section>
 
 <section class="section bg-mist"><div class="wrap">

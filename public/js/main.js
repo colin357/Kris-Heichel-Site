@@ -70,6 +70,21 @@
   }
   document.querySelectorAll('form[data-form]').forEach(wireForm);
 
+  /* ---------- Long reviews scroll inside their card ---------- */
+  function markScrollable() {
+    document.querySelectorAll('.review blockquote').forEach(function (q) {
+      var scrollable = q.scrollHeight > q.clientHeight + 2;
+      q.classList.toggle('is-scrollable', scrollable);
+      if (scrollable) { q.tabIndex = 0; q.setAttribute('aria-label', 'Review text, scroll to read more'); }
+      else { q.removeAttribute('tabindex'); q.removeAttribute('aria-label'); }
+    });
+  }
+  document.querySelectorAll('.review blockquote').forEach(function (q) {
+    q.addEventListener('scroll', function () { q.classList.toggle('at-end', q.scrollTop + q.clientHeight >= q.scrollHeight - 2); }, { passive: true });
+  });
+  markScrollable();
+  window.addEventListener('resize', markScrollable);
+
   /* ---------- Reviews slider ---------- */
   document.querySelectorAll('[data-slider]').forEach(function (slider) {
     var track = slider.querySelector('.slider-track');
