@@ -5,7 +5,8 @@
   "description": "Static website for The Heichel Team at Fairway Home Mortgage (yourwaymortgage.com)",
   "type": "module",
   "scripts": {
-    "build": "node build.mjs",
+    "build": "node scripts/sync-reviews.mjs && node build.mjs",
+    "build:offline": "node build.mjs",
     "serve": "npx --yes http-server dist -p 8080 -e html -c-1",
     "dev": "node build.mjs && npm run serve"
   },

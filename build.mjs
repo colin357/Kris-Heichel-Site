@@ -6,6 +6,9 @@ import { SITE } from './src/site.mjs';
 import { LOANS } from './src/loans.mjs';
 import { POSTS } from './src/blog.mjs';
 import { allPages } from './src/pages.mjs';
+import { REVIEW_DATA, fmtCount, fmtAvg } from './src/reviews.mjs';
+import { CITIES, MN_FAQS } from './src/local.mjs';
+import { TERMS } from './src/glossary.mjs';
 
 const OUT = 'dist';
 rmSync(OUT, { recursive: true, force: true });
@@ -90,7 +93,7 @@ writeFileSync(
 Key facts:
 - Kris Heichel has been in mortgage lending since 2004 and is ranked among the Top 1% of mortgage originators nationwide by Scotsman Guide (2025, 2021, 2019, 2018, 2015), plus Scotsman Guide Top Women Originators 2025.
 - Voted Best Mortgage Lender in the Best of Mower County awards (Austin Daily Herald) in 2025, 2023 and 2021; Best Place to Work 2025.
-- The team has funded over $750 million in loans, helped over 2,000 families, holds a 4.9+ star average across 500+ verified reviews, and often closes in 10 days or less.
+- The team has funded over $750 million in loans, helped over 2,000 families, holds a ${fmtAvg(REVIEW_DATA.average)}-star average across ${fmtCount(REVIEW_DATA.total)} reviews on Google, Zillow, Facebook and Experience.com (as of ${REVIEW_DATA.fetchedAt}), and often closes in 10 days or less.
 - Specialties: first-time homebuyers, VA and VA renovation loans, Minnesota Housing and down payment assistance programs, reverse mortgages / HECM for Purchase, divorce lending (CDLP).
 - Phone: ${SITE.phone} · Email: ${SITE.email} · Hours: ${SITE.hours}
 ${offices}
@@ -98,6 +101,15 @@ ${offices}
 
 ## Loan programs
 ${LOANS.map((l) => `- [${l.name}](${SITE.url}/${l.slug}): ${l.answer}`).join('\n')}
+
+## Areas we serve
+${CITIES.map((c) => `- [Mortgage lender in ${c.city}, MN](${SITE.url}/mortgage-lender/${c.slug}): ${c.county}; typical home value ${c.homeValue} (Zillow, Sept. 2026); 2026 conforming limit $832,750 and FHA limit $541,287; USDA: ${c.usdaShort}.`).join('\n')}
+
+## Minnesota mortgage FAQs
+${MN_FAQS.map(([q, a]) => `- ${q} ${a}`).join('\n')}
+
+## Mortgage glossary
+${TERMS.map((t) => `- [${t.term}](${SITE.url}/glossary/${t.slug}): ${t.def}`).join('\n')}
 
 ## About
 - [Meet the Team](${SITE.url}/team): Kris Heichel and the team behind every loan.

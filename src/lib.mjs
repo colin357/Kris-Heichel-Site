@@ -1,5 +1,6 @@
 // Shared building blocks: layout, navigation, schema helpers and reusable sections.
 import { SITE } from './site.mjs';
+import { REVIEW_DATA, fmtCount, fmtAvg } from './reviews.mjs';
 
 export const esc = (s = '') =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -17,6 +18,7 @@ export const NAV = [
     children: [
       ['Meet the Team', '/team'],
       ['Who is Kris?', '/kris'],
+      ['Areas We Serve', '/mortgage-lender'],
       ['For Realtors', '/realtors'],
       ['Why Fairway', '/why-fairway'],
     ],
@@ -44,6 +46,7 @@ export const NAV = [
     children: [
       ['Mortgage Education & Blog', '/education'],
       ['Our Loan Process', '/loan-process'],
+      ['Mortgage Glossary', '/glossary'],
       ['VA Benefits', '/va-benefits'],
       ['Home Equity Analysis', '/equity-analysis-plan'],
       ['Refi Watchlist', '/refi1'],
@@ -107,8 +110,8 @@ function footer() {
         <li>Reverse mortgage specialist helping retirees</li>
         <li>Certified Divorce Lending Professional (CDLP)</li></ul></div>
       <div><h3>Customer Service</h3><ul>
-        <li>4.9+ star average review rating</li>
-        <li>500+ verified client reviews</li>
+        <li>${fmtAvg(REVIEW_DATA.average)}-star average review rating</li>
+        <li>${fmtCount(REVIEW_DATA.total)}+ client reviews across Google, Zillow, Facebook and Experience.com</li>
         <li>Satisfaction scores above company averages</li>
         <li>Repeat and referral rates above industry benchmarks</li></ul></div>
       <div><h3>Community Involvement</h3><ul>
@@ -153,8 +156,16 @@ function footer() {
       ], { submit: 'Send', btnClass: 'btn-light' })}
     </div>
     <div>
-      <h2>Menu</h2>
-      <ul class="footer-links">${legal}</ul>
+      <h2>Areas We Serve</h2>
+      <ul class="footer-links">
+        <li><a href="/mortgage-lender/rochester-mn">Rochester, MN</a></li>
+        <li><a href="/mortgage-lender/austin-mn">Austin, MN</a></li>
+        <li><a href="/mortgage-lender/albert-lea-mn">Albert Lea, MN</a></li>
+        <li><a href="/mortgage-lender/owatonna-mn">Owatonna, MN</a></li>
+        <li><a href="/glossary">Mortgage Glossary</a></li>
+      </ul>
+      <h2 style="margin-top:1.5rem">Legal</h2>
+      <ul class="footer-links">${legal}<li><a href="/photo-credits">Photo Credits</a></li></ul>
     </div>
   </div>
   <div class="wrap legal">
@@ -210,6 +221,7 @@ export function baseGraph() {
       sameAs: [SITE.links.facebook, SITE.links.instagram, SITE.links.linkedin, SITE.links.google, SITE.links.reviews],
       knowsAbout: ['Conventional loans', 'FHA loans', 'VA loans', 'VA renovation loans', 'USDA loans', 'Jumbo loans', 'Renovation loans (FHA 203(k), Fannie Mae HomeStyle)', 'Reverse mortgages (HECM)', 'Down payment assistance', 'Minnesota Housing programs', 'Refinancing', 'DSCR investor loans', 'Divorce lending'],
       hasOfferCatalog: { '@type': 'OfferCatalog', name: 'Home loan programs', url: abs('/loan-programs') },
+      aggregateRating: { '@type': 'AggregateRating', ratingValue: REVIEW_DATA.average, reviewCount: REVIEW_DATA.total, bestRating: 5, worstRating: 1 },
     },
     ...offices,
     {
@@ -311,7 +323,7 @@ export function page({ path, title, description, body, crumbs, schema = [], ogIm
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Mulish:wght@400;600;700&family=Questrial&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Mrs+Saint+Delafield&family=Mulish:wght@400;600;700&family=Questrial&display=swap">
 <link rel="stylesheet" href="/css/styles.css">
 <link rel="alternate" type="text/plain" href="/llms.txt" title="LLM-friendly site summary">
 ${extraHead}<script type="application/ld+json">${json}</script>
@@ -431,15 +443,25 @@ const fmtDate = (d) => new Date(d + 'T12:00:00').toLocaleDateString('en-US', { m
 export { fmtDate };
 
 export function reviewsSection() {
-  const cards = REVIEWS.map(
-    ([t, n, c, d]) => `<figure class="review"><span class="stars" aria-label="5 out of 5 stars">★★★★★</span><blockquote><p>“${esc(t)}”</p></blockquote>
-<figcaption><strong>${esc(n)}</strong>${esc(c)} · <time datetime="${d}">${fmtDate(d)}</time> · 5.0 rating</figcaption></figure>`
+  // Latest synced reviews first, then the hand-picked ones from the original site.
+  const synced = REVIEW_DATA.reviews.map((r) => [r.text, r.name, r.city, r.date, r.source, r.rating]);
+  const seen = new Set(synced.map((r) => r[1]));
+  const all = [...synced, ...REVIEWS.filter((r) => !seen.has(r[1])).map((r) => [...r, '', 5])];
+  const stars = (n) => '★'.repeat(Math.round(n)) + '☆'.repeat(5 - Math.round(n));
+  const cards = all.map(
+    ([t, n, c, d, src, rating]) => `<figure class="review"><span class="stars" aria-label="${rating} out of 5 stars">${stars(rating)}</span><blockquote><p>“${esc(t)}”</p></blockquote>
+<figcaption><strong>${esc(n)}</strong>${c ? esc(c) + ' · ' : ''}<time datetime="${d}">${fmtDate(d)}</time>${src ? ' · via ' + esc(src) : ''}</figcaption></figure>`
   ).join('');
+  const sources = REVIEW_DATA.bySource.map((x) => `<li><strong>${fmtAvg(x.average)}</strong> ${esc(x.name)} <span>(${fmtCount(x.count)})</span></li>`).join('');
   return `<section class="section" aria-labelledby="reviews-h"><div class="wrap">
 <div class="banner"><div><span class="eyebrow">Serving Minnesota and beyond since ${SITE.since}</span><h2 id="reviews-h">What people are saying about us.</h2></div>
-<a class="btn btn-teal arrow" href="${SITE.links.reviews}" target="_blank" rel="noopener">See More Reviews</a></div>
+<a class="btn btn-teal arrow" href="${SITE.links.reviews}" target="_blank" rel="noopener">Read All ${fmtCount(REVIEW_DATA.total)} Reviews</a></div>
 <hr class="rule">
-<p class="lede">The Heichel Team holds a 4.9+ star average across 500+ verified client reviews, including a 5.0 rating on Google.</p>
+<div class="rating-summary">
+  <p class="rating-big"><span class="rating-num">${fmtAvg(REVIEW_DATA.average)}</span><span class="stars" aria-hidden="true">★★★★★</span><span>average from ${fmtCount(REVIEW_DATA.total)} reviews for Kris Heichel</span></p>
+  <ul class="rating-sources" aria-label="Ratings by source">${sources}</ul>
+  <p class="form-note">Synced from <a href="${REVIEW_DATA.source}" target="_blank" rel="noopener">Experience.com</a>, which combines Kris’s reviews from each source. Updated <time datetime="${REVIEW_DATA.fetchedAt}">${fmtDate(REVIEW_DATA.fetchedAt)}</time>.</p>
+</div>
 <div class="slider" data-slider>
   <div class="slider-track reviews" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Client reviews">${cards}</div>
   <div class="slider-controls">

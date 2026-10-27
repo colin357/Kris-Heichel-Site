@@ -1,0 +1,101 @@
+{
+  "source": "https://www.experience.com/reviews/kris-heichel-152065",
+  "fetchedAt": "2026-10-27",
+  "total": 1380,
+  "average": 4.86,
+  "bySource": [
+    {
+      "name": "Experience.com",
+      "count": 1152,
+      "average": 4.85
+    },
+    {
+      "name": "Google",
+      "count": 131,
+      "average": 4.98
+    },
+    {
+      "name": "Facebook",
+      "count": 51,
+      "average": 4.61
+    },
+    {
+      "name": "Zillow",
+      "count": 45,
+      "average": 5
+    }
+  ],
+  "stars": {
+    "1": 2,
+    "2": 3,
+    "3": 11,
+    "4": 128,
+    "5": 1242
+  },
+  "reviews": [
+    {
+      "text": "Honestly being able to help us get prepared in all of our steps to get to buying a home! Along with showing us how to fix our credit and everything along those lines! They were very on top of everything and got the process done so fast and smoothly for us! Along with giving us many of different options to get to our end goal of buying a house! The communication was so perfect as well! They answered all the questions we had in such a timely manner! Such a great team to work with and I will forever brag about how awesome their team is!",
+      "rating": 5,
+      "name": "Izibel V",
+      "city": "Austin, MN",
+      "date": "2026-10-23",
+      "source": "Experience"
+    },
+    {
+      "text": "We're ready when i had questions. We're very helpful. I would most definitely use them again. If need arose.",
+      "rating": 5,
+      "name": "Bonnie M",
+      "city": "Austin, MN",
+      "date": "2026-10-07",
+      "source": "Experience"
+    },
+    {
+      "text": "This whole process was great from the beginning to the end. We thank you for all the help you gave us to be able to fulfill the dream of having our own house and for all the help you gave us without your help this would not have been possible. Thank you very much for everything and for all the help we received. Thank you, thank you",
+      "rating": 5,
+      "name": "Alberto E",
+      "city": "Austin, MN",
+      "date": "2026-10-07",
+      "source": "Experience"
+    },
+    {
+      "text": "Great communication and always answered any questions I had in a reasonable amount of time. Made the whole process smooth and easy",
+      "rating": 5,
+      "name": "Rylan C",
+      "city": "Emmons, MN",
+      "date": "2026-10-05",
+      "source": "Experience"
+    },
+    {
+      "text": "Kept informed along the way. Responded to questions quickly and clearly.",
+      "rating": 5,
+      "name": "Galen S",
+      "city": "Lake Wilson, MN",
+      "date": "2026-10-02",
+      "source": "Experience"
+    },
+    {
+      "text": "Just became a home owner through the heichel team and I would recommend anyone to go through them and any questions I had they had answers too and had very quick communication through the whole process",
+      "rating": 5,
+      "name": "Brandon R  ",
+      "city": "",
+      "date": "2026-10-01",
+      "source": "Google"
+    },
+    {
+      "text": "Everything if I had any questions or comcerns they worked through it all the way with me very good communication and if I had worries about anything they would solve any complications or problems",
+      "rating": 5,
+      "name": "Brandon G",
+      "city": "Austin, MN",
+      "date": "2026-10-01",
+      "source": "Experience"
+    },
+    {
+      "text": "The Heichel team was wonderful to work with. They answered all our questions and made a hectic few weeks as easy as possible for us.",
+      "rating": 5,
+      "name": "Emma D  ",
+      "city": "",
+      "date": "2026-09-29",
+      "source": "Google"
+    }
+  ]
+}

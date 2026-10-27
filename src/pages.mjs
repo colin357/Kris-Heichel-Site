@@ -1,6 +1,12 @@
 // Every page on the site. Each entry: { path, html }.
 import { SITE } from './site.mjs';
 import { LOANS } from './loans.mjs';
+import { REVIEW_DATA, fmtCount, fmtAvg } from './reviews.mjs';
+import { icon } from './icons.mjs';
+import { CITIES, MN_FAQS, MN_PROGRAMS, SOURCES, LIMITS_2026 } from './local.mjs';
+import { TERMS, termBySlug } from './glossary.mjs';
+import { KRIS_QA } from './kris-qa.mjs';
+import { PHOTOS, credit } from './photos.mjs';
 import { POSTS, CATEGORIES } from './blog.mjs';
 import {
   page, pageHero, breadcrumbs, img, esc, abs, form, faqList, faqSchema, haveQuestions, ctaStrip, calendly,
@@ -47,46 +53,81 @@ const REFI_FAQS = [
 /* ================= Home ================= */
 function home() {
   const goals = [
-    ['help-purchase', 'Purchase the Smart Way', '/loan-programs', 'Brick home with arched front entry'],
-    ['help-equity', 'Tap Into Your Equity Without Selling', '/equity-analysis-plan', 'Bright open-concept kitchen'],
-    ['help-investment', 'Buy an Investment Property', '/investor-builder', 'Two-story home with stone accents'],
-    ['help-pmi', 'Eliminate Your Mortgage Insurance', '/refi1', 'Living room with large windows'],
-    ['help-payoff', 'Pay Off Your Home Faster (Save Thousands)', '/fixed-rate', 'Cozy living room with fireplace'],
+    ['key', 'Buy Your First Home', 'Low-down-payment loans, Minnesota Housing and down payment help.', '/dpa'],
+    ['flag', 'Use Your VA Benefit', 'Zero down, no PMI, and VA renovation loans most lenders don’t offer.', '/va-benefits'],
+    ['hammer', 'Buy and Renovate', 'Finance the home and the updates in one loan.', '/renovation'],
+    ['percent', 'Refinance or Drop PMI', 'Lower your payment, shorten your term or remove mortgage insurance.', '/refi1'],
+    ['coins', 'Tap Your Equity', 'Put your home’s value to work without selling.', '/equity-analysis-plan'],
+    ['sun', 'Rightsize in Retirement', 'Reverse mortgages and HECM for Purchase for homeowners 62+.', '/reverse-purchase'],
   ];
+  const stats = [
+    ['users', '2,000+', 'families helped'],
+    ['coins', '$750M+', 'in funded loans'],
+    ['clock', '10 days', 'closings, often'],
+    ['star', fmtAvg(REVIEW_DATA.average) + '★', fmtCount(REVIEW_DATA.total) + ' reviews'],
+    ['award', 'Top 1%', 'Scotsman Guide'],
+  ];
+  const faqs = [...HOME_FAQS, ...MN_FAQS];
   const body = `
-<section class="hero" style="background-image:url('/img/hero-house.webp')">
-  <div class="wrap hero-inner">
-    <div>
-      <h1>Reliable Mortgage Solutions Tailored To You</h1>
-      <p class="lede">The Heichel Team at Fairway Home Mortgage helps families in Rochester, Austin and all of Southeast Minnesota buy, build, renovate and refinance. We’ve made the home loan process simple and smooth for over 20 years.</p>
-      <div class="btn-row">${apply()}<a class="btn btn-teal" href="/schedule">Free Consultation</a></div>
+<section class="hero-k">
+  <div class="wrap hero-k-inner">
+    <div class="hero-k-copy">
+      <span class="eyebrow">Kris Heichel · Branch Manager · NMLS #${SITE.nmls}</span>
+      <h1>Let’s get you home, Southeast&nbsp;Minnesota.</h1>
+      <p class="lede">I’m Kris Heichel. For more than 20 years, my team and I have helped 2,000+ families in Rochester, Austin and across Southeast Minnesota buy, build, renovate and refinance, with straight answers and closings that are often done in 10 days or less.</p>
+      <p class="signature" aria-hidden="true">Kris Heichel</p>
+      <div class="btn-row">${apply()}<a class="btn btn-outline" href="/schedule">Book a Free Call</a></div>
+      <ul class="trust-row">
+        <li>${icon('star')}<span><strong>${fmtAvg(REVIEW_DATA.average)}</strong> from ${fmtCount(REVIEW_DATA.total)} reviews</span></li>
+        <li>${icon('award')}<span>Scotsman Guide <strong>Top 1%</strong></span></li>
+        <li>${icon('heart')}<span>Best Mortgage Lender, <strong>Mower County 2025</strong></span></li>
+      </ul>
     </div>
-    ${img('kris-hero', 'Kris Heichel, Branch Manager and Senior Loan Officer, smiling in her office', { cls: 'hero-photo', eager: true, w: 550, h: 510 })}
+    <figure class="hero-k-photo">
+      ${img('kris-hero', 'Kris Heichel, Branch Manager and Senior Loan Officer, smiling in her office', { eager: true, w: 560, h: 640 })}
+      <figcaption class="hero-badge">${icon('pin')}<span>Rochester &amp; Austin offices<br><a href="tel:${SITE.phoneE164}">${SITE.phone}</a></span></figcaption>
+    </figure>
   </div>
-  <ul class="stats wrap" aria-label="By the numbers">
-    <li>Funded over<strong>$100 million</strong>in home loans</li>
-    <li>Helped<strong>500+ families</strong>achieve homeownership</li>
-    <li>Closed<strong>200+ loans</strong>in a single year</li>
-    <li>Maintained a<strong>95%+</strong>on-time closing rate</li>
-    <li>Ranked in the<strong>Top 1%</strong>of loan officers nationally</li>
-  </ul>
 </section>
+
+<section class="stats-band" aria-label="By the numbers"><ul class="wrap stats-k">
+  ${stats.map(([i, n, l]) => `<li>${icon(i)}<strong>${n}</strong><span>${l}</span></li>`).join('')}
+</ul></section>
+
+<section class="section"><div class="wrap">
+  <div class="section-head"><span class="eyebrow">How we can help</span><h2>What are you hoping to do?</h2></div>
+  <div class="grid grid-3 goal-grid">${goals.map(([i, t, d, h]) => `<a class="goal-k" href="${h}"><span class="icon-badge">${icon(i)}</span><span><strong>${t}</strong><span>${d}</span></span>${icon('arrow', { cls: 'icon goal-arrow' })}</a>`).join('')}</div>
+</div></section>
+
+<section class="section bg-sand"><div class="wrap split">
+  <div>
+    <span class="eyebrow">Rochester’s trusted mortgage team</span>
+    <h2>Local people who answer the phone</h2>
+    <p>The Heichel Team, powered by Fairway Home Mortgage, combines hometown service with the strength of a national lender. With <strong>over $750 million in funded loans</strong> and <strong>30+ years of combined experience</strong>, we specialize in VA, FHA, Conventional, Jumbo, renovation and reverse mortgages.</p>
+    <p>We keep you and your agent informed at every step, and we don’t go quiet near the finish line. That’s how we’ve earned a <strong>${fmtAvg(REVIEW_DATA.average)}-star rating across ${fmtCount(REVIEW_DATA.total)} reviews</strong>, one family at a time.</p>
+    <div class="btn-row"><a class="btn btn-teal" href="/team">Meet the Team</a><a class="btn btn-outline" href="/kris">Kris’s Story</a></div>
+  </div>
+  <figure class="photo-frame">${img('team-office', 'The Heichel Team standing outside their Fairway Home Mortgage office in Austin, MN', { w: 700, h: 467 })}</figure>
+</div></section>
 
 <section class="section-tight bg-teal"><div class="wrap banner">
   <h2>Your VA Benefit Can Do <em>More</em> Than You Think</h2>
   <a class="btn btn-gold arrow" href="/va-benefits">Learn More About VA Loans</a>
 </div></section>
 
-<section class="section"><div class="wrap">
-  <h2>What We Can Help You Achieve</h2><hr class="rule">
-  <div class="grid grid-5">${goals.map(([i, t, h, a]) => `<a class="goal-card" href="${h}">${img(i, a, { w: 300, h: 300 })}<span class="label">${t}</span><span class="more">Let’s Go</span></a>`).join('')}</div>
+${reviewsSection()}
+
+<section class="section bg-sand" aria-labelledby="areas-h"><div class="wrap">
+  <div class="section-head"><span class="eyebrow">Areas we serve</span><h2 id="areas-h">Mortgages across Southeast Minnesota</h2>
+  <p class="lede">Local home values, loan limits, USDA eligibility and down payment programs for the towns we know best.</p></div>
+  <div class="grid grid-4 city-grid">${CITIES.map((c) => `<a class="city-card" href="/mortgage-lender/${c.slug}">${img(c.photo, PHOTOS[c.photo].alt, { w: 400, h: 300 })}<span><strong>${c.city}, MN</strong><span>Typical home value ${c.homeValue}</span></span></a>`).join('')}</div>
 </div></section>
 
-<section class="section-tight bg-slate"><div class="wrap split">
+<section class="section"><div class="wrap split">
   <div>
-    <h2>Stay Ready to Refi</h2>
-    <span class="eyebrow">Get notified when rates drop</span>
-    <p>Get notified when it’s the right time to refinance. Smart alerts based on your current loan and goals.</p>
+    <span class="eyebrow">Stay ready to refi</span>
+    <h2>Get notified when rates drop</h2>
+    <p>Join our Refi Watchlist and we’ll reach out when a refinance could actually save you money, based on your current rate and goals.</p>
   </div>
   <div class="card refi-card">${form('refi-watchlist-home', [
     { name: 'name', label: 'Name', required: true, half: true, autocomplete: 'name' },
@@ -95,39 +136,8 @@ function home() {
   ], { submit: 'Join The List', btnClass: 'btn-gold', note: 'No spam. We’ll only reach out when a refinance could save you money.' })}</div>
 </div></section>
 
-<section class="section bg-mist"><div class="wrap">
-  <div class="center"><span class="eyebrow">Rochester’s trusted mortgage team</span><h2>Meet the Heichel Team</h2></div>
-  <div class="split" style="margin-top:2rem;align-items:start">
-    <div>
-      <p>At The Heichel Team in Rochester and Austin, MN, we help homebuyers and homeowners navigate the mortgage process with clarity, speed and confidence. As part of Fairway Home Mortgage, we combine local expertise with nationwide strength to deliver an experience that’s anything but ordinary.</p>
-      <p>With over <strong>$750 million in funded loans</strong> and more than <strong>30 years of combined mortgage experience</strong>, our team has helped <strong>over 2,000 families</strong> purchase or refinance their homes. We specialize in VA, FHA, Conventional, Jumbo and Reverse Mortgage financing, so no matter where you are in life, we have a solution built for you.</p>
-      <p><a href="/kris">Kris Heichel</a> is a <strong>Top 1% Mortgage Originator recognized by the Scotsman Guide</strong>, one of the most prestigious rankings in the mortgage industry. As First Vice Chair of the Austin Area Chamber of Commerce board, Kris is deeply rooted in the communities she serves.</p>
-    </div>
-    <div>
-      <p>That commitment shows up in the numbers: a <strong>4.9-star rating from hundreds of verified reviews</strong>, and a reputation built one family at a time.</p>
-      <p>Whether you’re a first-time homebuyer, VA borrower, move-up buyer or looking to refinance, our team delivers personalized solutions and fast closings, often in 10 days or less. We’re known for heart-driven service, clear communication and creative loan strategies that make the complex feel simple.</p>
-      <p>Outside of work, our team is fueled by the same things that matter most to our clients: traveling, great food and making memories with family. Serving Rochester and all of Southeast Minnesota, our goal is simple: become the #1 local mortgage team, one family, one home, one closing at a time.</p>
-    </div>
-  </div>
-  <div class="grid grid-2" style="margin-top:2rem">
-    <div class="photo-card">${img('team-office', 'The Heichel Team standing outside their Fairway Home Mortgage office in Austin, MN', { w: 700, h: 525 })}<a class="btn btn-gold" href="/team">Meet the Team</a></div>
-    <div class="photo-card">${img('house-stone', 'Two-story stone and siding home with a three-car garage', { w: 700, h: 525 })}${apply('Start Your Application', 'btn-teal')}</div>
-  </div>
-</div></section>
-
-${reviewsSection()}
-
 <section class="section-tight"><div class="wrap split">
-  <div>
-    <h2>What Is the Mortgage Application Process Like?</h2>
-    <p>The mortgage application process typically involves filling out an application, submitting documentation such as proof of income and assets, undergoing a credit check, and getting an appraisal of the property. The lender then reviews your application and approves or denies your loan. If approved, you sign the loan agreement and complete any other necessary paperwork before closing on the loan.</p>
-    <a class="btn btn-teal" href="/loan-process">See Our 9-Step Process</a>
-  </div>
-  ${img('family-new-home', 'Young family with a baby in their new home', { cls: 'rounded', w: 600, h: 400 })}
-</div></section>
-
-<section class="section-tight"><div class="wrap split">
-  ${img('house-modern-stone', 'Modern home with stone exterior at dusk', { cls: 'rounded', w: 500, h: 400 })}
+  <figure class="photo-frame">${img('rochester-skyline', PHOTOS['rochester-skyline'].alt, { w: 640, h: 326 })}<figcaption>${credit('rochester-skyline')}</figcaption></figure>
   <div>
     <h2>Rate Update</h2>
     <p>Today’s average mortgage rates by loan type. Rates change daily; <a href="/schedule">talk with us</a> for a quote based on your credit, down payment and goals.</p>
@@ -135,17 +145,17 @@ ${reviewsSection()}
   </div>
 </div></section>
 
-<section class="section bg-mist" aria-labelledby="faq-h"><div class="wrap">
-  <div class="center"><span class="eyebrow">The mortgage industry is like a foreign language…</span><h2 id="faq-h">Frequently Asked Questions</h2>
-  <p class="lede">Just what you need to know to make smart moves with your mortgage.</p></div>
-  <div style="margin-top:2rem">${faqList(HOME_FAQS)}</div>
+<section class="section bg-sand" aria-labelledby="faq-h"><div class="wrap">
+  <div class="section-head center"><span class="eyebrow">The mortgage industry is like a foreign language…</span><h2 id="faq-h">Frequently Asked Questions</h2>
+  <p class="lede">Just what you need to know to make smart moves with your mortgage. New to the lingo? Try our <a href="/glossary">mortgage glossary</a>.</p></div>
+  ${faqList(faqs)}
 </div></section>`;
   return page({
     path: '/',
     title: 'Kris Heichel | The Heichel Team | Fairway Mortgage | Rochester & Austin, MN',
     description: SITE.description,
     body,
-    schema: [faqSchema(HOME_FAQS)],
+    schema: [faqSchema(faqs)],
   });
 }
 
@@ -278,7 +288,7 @@ ${breadcrumbs(crumbs)}<span class="eyebrow">About us</span><h1>Meet Our Team</h1
     <p>With over two decades of experience in the mortgage industry, Kris serves as the Branch Manager and Senior Loan Officer for The Heichel Team, powered by Fairway Independent Mortgage Corporation (NMLS #${SITE.companyNmls}), in Rochester and Austin, Minnesota.</p>
     <p>A proud Southeast Minnesota native, Kris began her career in 2004 and has since earned recognition among the Top 1% of Mortgage Originators nationwide, as well as multiple President’s Club and Chairman’s Club honors within Fairway. Specializing in customized lending solutions, from first-time homebuyer programs to complex and jumbo loans, Kris approaches every transaction with expertise, efficiency and care.</p>
     <p>Her relentless dedication and client-first mindset have made her a trusted partner to both homebuyers and real estate professionals across the region.</p>
-    <p><a href="mailto:${SITE.email}">${SITE.email}</a> · <a href="tel:${SITE.phoneE164}">${SITE.phone}</a> · <a href="https://share.google/QmDU4eyLjmMqLDWPP" target="_blank" rel="noopener">Google Business Profile (5.0 ★, 274 reviews)</a></p>
+    <p><a href="mailto:${SITE.email}">${SITE.email}</a> · <a href="tel:${SITE.phoneE164}">${SITE.phone}</a> · <a href="https://share.google/QmDU4eyLjmMqLDWPP" target="_blank" rel="noopener">Google Business Profile</a></p>
     <a class="btn btn-teal" href="/kris">More About Kris</a>
   </div>
 </div></section>
@@ -358,7 +368,11 @@ ${breadcrumbs(crumbs)}<span class="eyebrow">About</span><h1>Who is Kris?</h1>
 </div>
 <div class="gallery" style="margin-top:20px">${gallery.slice(2).map(([i, a]) => img(i, a, { w: 300, h: 300 })).join('')}</div>
 </div></section>
-<section class="section bg-mist-soft"><div class="wrap">
+<section class="section bg-sand" id="in-her-words" aria-labelledby="qa-h"><div class="wrap wrap-narrow">
+  <div class="section-head center"><span class="eyebrow">In Kris’s words</span><h2 id="qa-h">Questions people ask Kris</h2></div>
+  <div class="qa-list">${KRIS_QA.map(([q, a]) => `<div class="qa"><h3>${esc(q)}</h3><blockquote><p>${esc(a)}</p></blockquote></div>`).join('')}</div>
+</div></section>
+<section class="section"><div class="wrap">
   <div class="center"><span class="eyebrow">Memberships</span><h2>Boards &amp; Leadership Roles</h2></div>
   <ul class="award-list grid-2 grid" style="margin-top:2rem">${boards.map(item).join('')}</ul>
 </div></section>
@@ -383,6 +397,7 @@ ${breadcrumbs(crumbs)}<span class="eyebrow">About</span><h1>Who is Kris?</h1>
     ogImage: 'kris-headshot',
     type: 'ProfilePage',
     mainEntity: { '@id': KRIS_ID },
+    schema: [faqSchema(KRIS_QA)],
   });
 }
 
@@ -615,7 +630,7 @@ ${breadcrumbs(crumbs)}<span class="eyebrow">A benefit you’ve earned — and ma
 
 function equity() {
   const crumbs = [['Education', '/education'], ['Home Equity Analysis', '/equity-analysis-plan']];
-  const body = `<section class="page-hero page-hero-photo" style="background-image:url('/img/equity-hero.webp')"><div class="wrap split" style="padding-top:10px;padding-bottom:10px">
+  const body = `<section class="page-hero page-hero-photo" style="background-image:url('/img/austin-autumn-street.webp')"><div class="wrap split" style="padding-top:10px;padding-bottom:10px">
   <div>${breadcrumbs(crumbs)}<span class="eyebrow">Equity analysis</span><h1>Unlock the Power of Your Home</h1>
   <p class="lede">Whether you’re planning a renovation, consolidating debt, or funding a big dream, tapping into your home’s equity gives you the freedom to move forward.</p></div>
   <div class="card"><h2 class="label">Start Your Equity Assessment Today</h2>${form('equity-analysis', [
@@ -641,13 +656,13 @@ function equity() {
     description: 'Get a free home equity assessment. Learn how much equity you can access for renovations, debt consolidation or big goals, and whether a cash-out refinance or home equity loan fits.',
     body,
     crumbs,
-    ogImage: 'equity-hero',
+    ogImage: 'austin-autumn-street',
   });
 }
 
 function refiWatch() {
   const crumbs = [['Education', '/education'], ['Refi Watchlist', '/refi1']];
-  const body = `<section class="page-hero page-hero-photo" style="background-image:url('/img/refi-watch-hero.webp')"><div class="wrap split" style="padding-top:10px;padding-bottom:10px">
+  const body = `<section class="page-hero page-hero-photo" style="background-image:url('/img/rochester-skyline-wide.webp')"><div class="wrap split" style="padding-top:10px;padding-bottom:10px">
   <div>${breadcrumbs(crumbs)}<h1>Refi Watch List</h1><p class="lede">Stay ahead of the market. Let us notify you when it’s the perfect time to refinance, based on your current rate and goals.</p></div>
   <div class="card">${form('refi-watchlist', [
     { name: 'name', label: 'Name', required: true, autocomplete: 'name' },
@@ -669,7 +684,7 @@ function refiWatch() {
     description: 'Join the free Refi Watch List and get notified when mortgage rates drop enough to make refinancing worth it for your current rate and goals.',
     body,
     crumbs,
-    ogImage: 'refi-watch-hero',
+    ogImage: 'rochester-skyline-wide',
     schema: [faqSchema(REFI_FAQS)],
   });
 }
@@ -696,7 +711,7 @@ function schedule() {
     description: 'Book a free mortgage consultation with Kris Heichel and The Heichel Team in Rochester or Austin, MN. Call 507.460.4500, send a message, or pick a time online.',
     body,
     crumbs,
-    ogImage: 'schedule-hero',
+    ogImage: 'team-office',
     type: 'ContactPage',
   });
 }
@@ -769,6 +784,177 @@ function post(p) {
   });
 }
 
+/* ================= Local pages ================= */
+const src = ([label, url]) => `<a href="${url}" target="_blank" rel="noopener">${esc(label)}</a>`;
+
+function cityPage(c) {
+  const path = `/mortgage-lender/${c.slug}`;
+  const crumbs = [['Areas We Serve', '/mortgage-lender'], [`${c.city}, MN`, path]];
+  const faqs = [...c.faqs, ...MN_FAQS.slice(0, 3)];
+  const facts = [
+    ['County', `${c.county} (population ${c.countyPop})`],
+    ['City population', `${c.population} (2025 Census estimate)`],
+    ['Typical home value', `${c.homeValue} (Zillow, September 2026)${c.homeValueNote ? `, ${c.homeValueNote}` : ''}`],
+    ['2026 conforming loan limit', `${LIMITS_2026.conforming} (1 unit)`],
+    ['2026 FHA loan limit', `${LIMITS_2026.fha} (1 unit)`],
+    ['USDA zero-down eligibility', c.usdaShort],
+    ['Major employers', c.employers],
+    ['Nearest Heichel Team office', c.office],
+  ];
+  const body = `<section class="page-hero page-hero-photo" style="background-image:url('/img/${c.photo}.webp')"><div class="wrap" style="padding-top:20px;padding-bottom:20px">
+${breadcrumbs(crumbs)}<span class="eyebrow">${c.county}, Minnesota</span>
+<h1>Mortgage Lender in ${c.city}, MN</h1>
+<p class="lede">Local guidance from The Heichel Team at Fairway Home Mortgage for buying, building, renovating and refinancing in ${c.city} and ${c.county}.</p>
+<div class="btn-row">${apply()}<a class="btn btn-ghost" href="/schedule">Book a Free Call</a></div>
+</div><p class="photo-credit wrap">${credit(c.photo)}</p></section>
+<section class="section"><div class="wrap split" style="align-items:start">
+  <div>
+    <div class="answer"><span class="label">Quick answer</span><p>The Heichel Team is a ${c.city}-area mortgage lender serving ${c.county}, led by Kris Heichel (NMLS #${SITE.nmls}). The typical ${c.city} home value was ${c.homeValue} in September 2026. In 2026 the conforming loan limit in ${c.county} is ${LIMITS_2026.conforming} and the FHA limit is ${LIMITS_2026.fha}. ${c.usda}</p></div>
+    <p>${c.intro}</p>
+    <h2 class="h3">Tips for ${c.city} buyers</h2>
+    <ul class="checks">${c.tips.map((t) => `<li>${t}</li>`).join('')}</ul>
+    <p>We also serve ${c.nearby.slice(0, -1).join(', ')} and ${c.nearby.at(-1)}.</p>
+  </div>
+  <table class="facts"><caption>${c.city}, MN at a glance</caption><tbody>
+    ${facts.map(([k, v]) => `<tr><th scope="row">${k}</th><td>${esc(v)}</td></tr>`).join('')}
+  </tbody></table>
+</div></section>
+<section class="section bg-sand"><div class="wrap">
+  <div class="section-head"><span class="eyebrow">Down payment help</span><h2>Homebuyer programs for ${c.city} buyers</h2></div>
+  <div class="grid grid-2">
+    <div>
+      <h3>Local programs</h3>
+      ${c.programs.map(([n, d, u]) => `<div class="card program"><h4><a href="${u}" target="_blank" rel="noopener">${esc(n)}</a></h4><p>${esc(d)}</p></div>`).join('')}
+      ${c.noLocalProgram ? `<p class="form-note">${esc(c.noLocalProgram)}</p>` : ''}
+    </div>
+    <div>
+      <h3>Statewide programs</h3>
+      ${MN_PROGRAMS.map(([n, d]) => `<div class="card program"><h4>${esc(n)}</h4><p>${esc(d)}</p></div>`).join('')}
+    </div>
+  </div>
+  <p class="form-note" style="margin-top:1.5rem">Program rules, amounts and funding change. We’ll confirm what’s open when you apply. See <a href="/dpa">down payment assistance</a> and <a href="/first-generation">first-generation buyer programs</a>.</p>
+</div></section>
+<section class="section"><div class="wrap">
+  <div class="section-head"><h2>Loan options that work well in ${c.city}</h2></div>
+  <div class="grid grid-4">
+    ${[['/conventional', 'Conventional', 'As little as 3% down with removable PMI.'], ['/fha', 'FHA', '3.5% down and flexible credit.'], ['/usda', 'USDA', 'Zero down in eligible areas.'], ['/va', 'VA', 'Zero down and no PMI for veterans.'], ['/renovation', 'Renovation', 'Buy and update in one loan.'], ['/jumbo', 'Jumbo', `Loans above ${LIMITS_2026.conforming}.`], ['/reverse-purchase', 'Reverse (HECM)', 'For homeowners 62 and older.'], ['/investor-builder', 'Investor & DSCR', 'Qualify on rental income.']].map(([h, t, d]) => `<a class="card card-link" href="${h}"><h3 class="h4">${t}</h3><p>${d}</p></a>`).join('')}
+  </div>
+</div></section>
+<section class="section bg-sand"><div class="wrap wrap-narrow">
+  <h2 class="center">${c.city} mortgage FAQs</h2>
+  ${faqList(faqs, { cols: 1 })}
+  <p class="reviewed">Sources: ${[SOURCES.census, SOURCES.zillow, SOURCES.fhfa, SOURCES.hud, SOURCES.usda, c.employersSource, SOURCES.mnhousingDpa, SOURCES.firstgen].map(src).join(' · ')}. Reviewed by <a href="/kris">Kris Heichel</a>, NMLS #${SITE.nmls}, <time datetime="${SITE.reviewed}">${fmtDate(SITE.reviewed)}</time>.</p>
+</div></section>
+<section class="section-tight"><div class="wrap">${ctaStrip(`Buying in ${c.city}?`, 'Get a local pre-approval and a clear plan in one conversation.')}</div></section>`;
+  return page({
+    path,
+    title: `Mortgage Lender in ${c.city}, MN | Home Loans | The Heichel Team`,
+    description: `Local mortgage lender for ${c.city}, MN and ${c.county}: ${c.city} home values, 2026 loan limits, USDA eligibility, down payment assistance and FAQs from The Heichel Team at Fairway.`,
+    body,
+    crumbs,
+    ogImage: c.photo,
+    schema: [
+      faqSchema(faqs),
+      {
+        '@type': 'Service',
+        '@id': abs(path) + '#service',
+        name: `Mortgage lending in ${c.city}, MN`,
+        serviceType: 'Mortgage lending',
+        provider: { '@id': BUSINESS_ID },
+        areaServed: [{ '@type': 'City', name: `${c.city}, Minnesota` }, { '@type': 'AdministrativeArea', name: `${c.county}, Minnesota` }, ...c.nearby.map((n) => ({ '@type': 'City', name: `${n}, Minnesota` }))],
+        url: abs(path),
+      },
+    ],
+  });
+}
+
+function areasIndex() {
+  const crumbs = [['Areas We Serve', '/mortgage-lender']];
+  const body = `${pageHero({ title: 'Areas We Serve', crumbs, lede: 'The Heichel Team serves all of Southeast Minnesota from offices in Rochester and Austin, and we’re licensed in CO, MN, IA, WI, SD, AZ and MI.' })}
+<section class="section"><div class="wrap">
+  <div class="grid grid-2 city-grid">${CITIES.map((c) => `<a class="city-card city-card-lg" href="/mortgage-lender/${c.slug}">${img(c.photo, PHOTOS[c.photo].alt, { w: 600, h: 400 })}<span><strong>${c.city}, MN</strong><span>${c.county} · typical home value ${c.homeValue} · USDA: ${c.usdaShort.toLowerCase()}</span></span></a>`).join('')}</div>
+</div></section>
+<section class="section bg-sand"><div class="wrap wrap-narrow">
+  <h2 class="center">Southeast Minnesota mortgage FAQs</h2>
+  ${faqList(MN_FAQS, { cols: 1 })}
+</div></section>`;
+  return page({
+    path: '/mortgage-lender',
+    title: 'Areas We Serve | Southeast Minnesota Mortgage Lender | The Heichel Team',
+    description: 'Mortgage lending in Rochester, Austin, Albert Lea, Owatonna and across Southeast Minnesota: local home values, loan limits, USDA eligibility and down payment programs.',
+    body,
+    crumbs,
+    ogImage: 'rochester-skyline',
+    type: 'CollectionPage',
+    schema: [faqSchema(MN_FAQS)],
+  });
+}
+
+/* ================= Glossary ================= */
+function glossaryIndex() {
+  const crumbs = [['Mortgage Glossary', '/glossary']];
+  const sorted = [...TERMS].sort((a, b) => a.term.localeCompare(b.term));
+  const body = `${pageHero({ title: 'Mortgage Glossary', crumbs, lede: 'Plain-English definitions of the mortgage terms you’ll hear from lenders, agents and title companies.' })}
+<section class="section"><div class="wrap wrap-narrow">
+  <dl class="glossary-list">${sorted.map((t) => `<div><dt><a href="/glossary/${t.slug}">${esc(t.term)}</a></dt><dd>${esc(t.def)}</dd></div>`).join('')}</dl>
+</div></section>`;
+  return page({
+    path: '/glossary',
+    title: 'Mortgage Glossary: Plain-English Definitions | The Heichel Team',
+    description: 'Plain-English definitions of common mortgage terms: PMI, DTI, escrow, APR, LTV, rate buydowns, closing costs, DSCR, HECM and more.',
+    body,
+    crumbs,
+    type: 'CollectionPage',
+    schema: [{
+      '@type': 'DefinedTermSet',
+      '@id': abs('/glossary') + '#set',
+      name: 'Mortgage Glossary',
+      url: abs('/glossary'),
+      hasDefinedTerm: TERMS.map((t) => ({ '@id': abs('/glossary/' + t.slug) + '#term' })),
+    }],
+  });
+}
+
+function glossaryTerm(t) {
+  const path = '/glossary/' + t.slug;
+  const crumbs = [['Mortgage Glossary', '/glossary'], [t.term, path]];
+  const related = t.related.map((r) => termBySlug[r]).filter(Boolean);
+  const body = `${pageHero({ title: esc(t.term), crumbs })}
+<section class="section"><div class="wrap prose">
+  <div class="answer"><span class="label">Definition</span><p>${esc(t.def)}</p></div>
+  ${t.body.map((p) => `<p>${esc(p)}</p>`).join('')}
+  ${t.example ? `<div class="card example"><h2 class="label">Example</h2><p>${esc(t.example)}</p></div>` : ''}
+  ${t.loans.length ? `<h2 class="h3">Related loan programs</h2><ul class="checks">${t.loans.map(([h, l]) => `<li><a href="${h}">${esc(l)}</a></li>`).join('')}</ul>` : ''}
+  ${related.length ? `<h2 class="h3">Related terms</h2><ul class="term-chips">${related.map((r) => `<li><a href="/glossary/${r.slug}">${esc(r.term)}</a></li>`).join('')}</ul>` : ''}
+  <p class="reviewed">Reviewed by <a href="/kris">Kris Heichel</a>, NMLS #${SITE.nmls} · <a href="/glossary">Back to the glossary</a></p>
+</div></section>
+<section class="section-tight"><div class="wrap">${ctaStrip('Have a question about your loan?', 'We’ll explain every term, fee and step in plain English.')}</div></section>`;
+  return page({
+    path,
+    title: `What Is ${t.term.replace(/ \(.*\)/, '')}? | Mortgage Glossary | The Heichel Team`,
+    description: t.def,
+    body,
+    crumbs,
+    schema: [{
+      '@type': 'DefinedTerm',
+      '@id': abs(path) + '#term',
+      name: t.term,
+      description: t.def,
+      url: abs(path),
+      inDefinedTermSet: { '@id': abs('/glossary') + '#set' },
+    }],
+  });
+}
+
+function photoCredits() {
+  const crumbs = [['Photo Credits', '/photo-credits']];
+  const body = `${pageHero({ title: 'Photo Credits', crumbs, lede: 'Local photos of Southeast Minnesota are used under Creative Commons licenses or the public domain. Thank you to these photographers.' })}
+<section class="section"><div class="wrap wrap-narrow"><ul class="credit-list">
+  ${Object.entries(PHOTOS).map(([k, p]) => `<li>${img(k, p.alt, { w: 160, h: 107 })}<div><strong>${esc(p.alt)}</strong><br>${credit(k)}</div></li>`).join('')}
+</ul><p class="form-note">Photos of Kris Heichel and The Heichel Team are owned by The Heichel Team. Other photography is licensed stock.</p></div></section>`;
+  return page({ path: '/photo-credits', title: 'Photo Credits | The Heichel Team', description: 'Credits and licenses for photos used on this site.', body, crumbs });
+}
+
 /* ================= Utility pages ================= */
 function thankYou() {
   const body = `${pageHero({ title: 'Thank You!', lede: 'We received your information and someone from The Heichel Team will be in touch shortly. Need us sooner? Call <a href="tel:' + SITE.phoneE164 + '">' + SITE.phone + '</a>.' })}
@@ -797,6 +983,11 @@ export function allPages() {
     { path: '/equity-analysis-plan', html: equity() },
     { path: '/refi1', html: refiWatch() },
     { path: '/schedule', html: schedule() },
+    { path: '/mortgage-lender', html: areasIndex() },
+    ...CITIES.map((c) => ({ path: `/mortgage-lender/${c.slug}`, html: cityPage(c) })),
+    { path: '/glossary', html: glossaryIndex() },
+    ...TERMS.map((t) => ({ path: '/glossary/' + t.slug, html: glossaryTerm(t) })),
+    { path: '/photo-credits', html: photoCredits() },
     { path: '/blog', html: blogIndex() },
     ...CATEGORIES.map(([s, n]) => ({ path: `/blog/category/${s}`, html: blogIndex(`/blog/category/${s}`, (p) => p.categories.includes(n), n) })),
     ...POSTS.map((p) => ({ path: '/blog/' + p.slug, html: post(p) })),

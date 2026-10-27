@@ -4,6 +4,8 @@ Rebuild of [yourwaymortgage.com](https://yourwaymortgage.com/) (Kris Heichel, Th
 
 ## Quick start
 
+`npm run build` first syncs reviews from Experience.com (`scripts/sync-reviews.mjs`), then builds. If the sync fails it keeps the last saved `data/reviews.json`; `npm run build:offline` skips it. Redeploy (or schedule a daily rebuild) to keep review counts current.
+
 ```bash
 npm run build   # renders everything to dist/ (Node 18+, no dependencies)
 npm run serve   # preview at http://localhost:8080
@@ -16,6 +18,12 @@ npm run serve   # preview at http://localhost:8080
 | `src/site.mjs` | Business facts: phone, offices, NMLS, links, form endpoint. **Edit here first.** |
 | `src/loans.mjs` | Loan program content (one entry per program page) |
 | `src/blog.mjs` | Blog posts |
+| `src/local.mjs` | City pages (Rochester, Austin, Albert Lea, Owatonna), Minnesota programs and FAQs, with sources. **Re-check figures each year** (loan limits change every January; home values monthly). |
+| `src/glossary.mjs` | Mortgage glossary terms (`/glossary/<term>`) |
+| `src/kris-qa.mjs` | "In Kris’s words" Q&A on `/kris` — **draft, Kris must review before launch** |
+| `src/photos.mjs` | Credits and licenses for Wikimedia Commons photos (shown on `/photo-credits`) |
+| `src/icons.mjs` | The site’s line-icon set |
+| `data/reviews.json` | Saved review totals and latest reviews from Experience.com |
 | `src/pages.mjs` | Page layouts for every other page |
 | `src/lib.mjs` | Header, footer, schema.org graph, shared components |
 | `public/` | CSS, JS (nav, forms, reviews slider, Calendly), optimized images |
@@ -58,8 +66,13 @@ Pages are written as `slug.html`, which these hosts serve at `/slug`. That keeps
 - The quizzes (`/quiz`, `/refi-quiz`, `/iq` and the VA quiz) were removed; their URLs redirect to `/education` and `/refi1`, and the homebuyer and refinancing tips moved to those pages.
 - The Hidden Market CE class promo was removed.
 
+## Design system
+
+Warm off-white pages (`--paper`), one sand alternate section (`.bg-sand`), teal for emphasis and gold accents. Icons come from `icon('name')` in `src/icons.mjs`. Local photos are real Southeast Minnesota scenes from Wikimedia Commons (CC0 / CC BY / CC BY-SA, credited on `/photo-credits` and in captions); the AI-generated house images were removed.
+
 ## Things to confirm with the client
 
-- The career start year: 2004 (team page) versus 2001 (one paragraph on the old /kris page). The footer also says "since 2003."
+- The Kris Q&A answers in `src/kris-qa.mjs` were assembled from the old site’s copy; Kris should rewrite them in her own words.
+- Career start: Experience.com confirms 2004, which the site uses. The footer still says the team has served Minnesota "since 2003".
 - The Agent Handbook PDF (142 MB) is still linked from its current host, because it's too large for the repo. A compressed copy could be self-hosted.
 - The form destination (Netlify Forms or a `FORM_ENDPOINT`) and who receives the notifications.
