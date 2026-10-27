@@ -44,9 +44,6 @@ export const NAV = [
     children: [
       ['Mortgage Education & Blog', '/education'],
       ['Our Loan Process', '/loan-process'],
-      ['Homebuyer Quiz', '/quiz'],
-      ['Refinance Quiz', '/refi-quiz'],
-      ['Financial IQ Quiz', '/iq'],
       ['VA Benefits', '/va-benefits'],
       ['Home Equity Analysis', '/equity-analysis-plan'],
       ['Refi Watchlist', '/refi1'],
@@ -93,8 +90,8 @@ function footer() {
   return `<section class="footer-features" aria-label="Tools and credentials">
   <div class="wrap">
     <div class="footer-tools">
-      <a href="/quiz"><strong>Homebuyer Quiz</strong><span>Understand where you stand in minutes</span></a>
-      <a href="/iq"><strong>Financial IQ Quiz</strong><span>Gauge your readiness and next steps</span></a>
+      <a href="/loan-programs"><strong>Loan Programs</strong><span>Compare every option side by side</span></a>
+      <a href="/loan-process"><strong>Our Loan Process</strong><span>Nine steps from first call to moving day</span></a>
       <a href="/refi1"><strong>Refi Watchlist</strong><span>Track rates &amp; get notified</span></a>
     </div>
     <div class="grid grid-4">
@@ -419,14 +416,6 @@ export function ctaStrip(title = 'Ready to see where you stand?', text = 'Get pr
 <div class="btn-row" style="margin:0"><a class="btn btn-gold" href="${SITE.links.apply}" target="_blank" rel="noopener">Start Your Application</a><a class="btn btn-ghost" href="/schedule">Free Consultation</a></div></div>`;
 }
 
-/** Quiz shell; question flow lives in public/js/main.js (QUIZZES). */
-export function quiz(id, { light = false, heading = '', sub = '' } = {}) {
-  return `<div class="quiz-panel${light ? ' quiz-light' : ''}" data-quiz="${id}">
-${heading ? `<h2>${heading}</h2>` : ''}${sub ? `<p class="quiz-hint">${sub}</p>` : ''}
-<div class="quiz-body"><noscript><p>Our quick quiz needs JavaScript. You can <a href="/schedule">schedule a free consultation</a> or call <a href="tel:${SITE.phoneE164}">${SITE.phone}</a> instead.</p></noscript></div>
-</div>`;
-}
-
 export const REVIEWS = [
   ['As a first time home buyer, I really appreciated how Kris took her time to go over everything at the pace that made me comfortable. Throughout the entire process of buying my home she communicated often with me and my Realtor. I always felt like I was getting personal service. Kris is the epitome of customer service and a true professional. I’m in my first home because of her and her team.', 'Eric J S', 'Rochester, MN', '2026-04-11'],
   ['Fairway and their team worked tirelessly throughout the entire process, making it a smooth transition in buying our new home. Communication from the team couldn’t be better and updates from start to finish all the way. The team was friendly and caring, I feel they were on my side every step.', 'James E', 'Albert Lea, MN', '2026-04-05'],
@@ -451,6 +440,13 @@ export function reviewsSection() {
 <a class="btn btn-teal arrow" href="${SITE.links.reviews}" target="_blank" rel="noopener">See More Reviews</a></div>
 <hr class="rule">
 <p class="lede">The Heichel Team holds a 4.9+ star average across 500+ verified client reviews, including a 5.0 rating on Google.</p>
-<div class="reviews">${cards}</div>
+<div class="slider" data-slider>
+  <div class="slider-track reviews" tabindex="0" role="region" aria-roledescription="carousel" aria-label="Client reviews">${cards}</div>
+  <div class="slider-controls">
+    <button type="button" class="slider-btn" data-dir="-1" aria-label="Previous reviews">‹</button>
+    <div class="slider-dots" aria-hidden="true"></div>
+    <button type="button" class="slider-btn" data-dir="1" aria-label="Next reviews">›</button>
+  </div>
+</div>
 </div></section>`;
 }

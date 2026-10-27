@@ -31,7 +31,6 @@ export const SITE = {
     linkedin: 'https://www.linkedin.com/in/kris-heichel-mlo-cdlp-cma-86118b43/',
     agentHandbook:
       'https://content.app-sources.com/s/732245580484058241/uploads/Files/Agent_Handbook_-_November_2025-4191635.pdf',
-    hiddenMarketClass: 'https://www.eventbrite.com/e/1991490743423?aff=oddtdtcreator',
     rateWidget: 'https://www2.optimalblue.com/OBMMI/widgetConfig.php',
     nmls: 'https://www.nmlsconsumeraccess.org/',
     awi: 'https://americanwarriorinitiative.com/',

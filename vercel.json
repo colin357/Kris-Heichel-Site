@@ -5,6 +5,9 @@
   "trailingSlash": false,
   "redirects": [
     { "source": "/investing", "destination": "/investor-builder", "permanent": true },
+    { "source": "/quiz", "destination": "/education#first-time-buyers", "permanent": true },
+    { "source": "/refi-quiz", "destination": "/refi1", "permanent": true },
+    { "source": "/iq", "destination": "/education", "permanent": true },
     { "source": "/blog/author/:path*", "destination": "/blog", "permanent": true },
     { "source": "/store/:path*", "destination": "/", "permanent": true }
   ],

@@ -109,7 +109,6 @@ ${LOANS.map((l) => `- [${l.name}](${SITE.url}/${l.slug}): ${l.answer}`).join('\n
 - [Loan process](${SITE.url}/loan-process): The 9 steps from first conversation to moving day.
 - [VA benefits](${SITE.url}/va-benefits): VA renovation loans and what veterans may be missing.
 - [Mortgage education](${SITE.url}/education): Answers to common mortgage questions.
-- [Homebuyer quiz](${SITE.url}/quiz), [Refinance quiz](${SITE.url}/refi-quiz), [Financial IQ quiz](${SITE.url}/iq)
 - [Home equity analysis](${SITE.url}/equity-analysis-plan), [Refi watchlist](${SITE.url}/refi1)
 - [Schedule a consultation](${SITE.url}/schedule)
 

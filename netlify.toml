@@ -8,6 +8,21 @@
   status = 301
 
 [[redirects]]
+  from = "/quiz"
+  to = "/education#first-time-buyers"
+  status = 301
+
+[[redirects]]
+  from = "/refi-quiz"
+  to = "/refi1"
+  status = 301
+
+[[redirects]]
+  from = "/iq"
+  to = "/education"
+  status = 301
+
+[[redirects]]
   from = "/blog/author/*"
   to = "/blog"
   status = 301

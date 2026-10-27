@@ -3,7 +3,7 @@ import { SITE } from './site.mjs';
 import { LOANS } from './loans.mjs';
 import { POSTS, CATEGORIES } from './blog.mjs';
 import {
-  page, pageHero, breadcrumbs, img, esc, abs, form, faqList, faqSchema, haveQuestions, ctaStrip, quiz, calendly,
+  page, pageHero, breadcrumbs, img, esc, abs, form, faqList, faqSchema, haveQuestions, ctaStrip, calendly,
   reviewsSection, contactFields, RATE_OPTIONS, CREDIT_OPTIONS, BUSINESS_ID, KRIS_ID, fmtDate,
 } from './lib.mjs';
 
@@ -47,11 +47,11 @@ const REFI_FAQS = [
 /* ================= Home ================= */
 function home() {
   const goals = [
-    ['help-purchase', 'Purchase the Smart Way', '/quiz', 'Brick home with arched front entry'],
+    ['help-purchase', 'Purchase the Smart Way', '/loan-programs', 'Brick home with arched front entry'],
     ['help-equity', 'Tap Into Your Equity Without Selling', '/equity-analysis-plan', 'Bright open-concept kitchen'],
     ['help-investment', 'Buy an Investment Property', '/investor-builder', 'Two-story home with stone accents'],
-    ['help-pmi', 'Eliminate Your Mortgage Insurance', '/refi-quiz', 'Living room with large windows'],
-    ['help-payoff', 'Pay Off Your Home Faster (Save Thousands)', '/refi-quiz', 'Cozy living room with fireplace'],
+    ['help-pmi', 'Eliminate Your Mortgage Insurance', '/refi1', 'Living room with large windows'],
+    ['help-payoff', 'Pay Off Your Home Faster (Save Thousands)', '/fixed-rate', 'Cozy living room with fireplace'],
   ];
   const body = `
 <section class="hero" style="background-image:url('/img/hero-house.webp')">
@@ -71,10 +71,6 @@ function home() {
     <li>Ranked in the<strong>Top 1%</strong>of loan officers nationally</li>
   </ul>
 </section>
-
-<section class="section-tight"><div class="wrap">
-  ${quiz('purchase', { heading: 'Check Your Buying Readiness in 60 Seconds', sub: 'No credit pull. Instant results.' })}
-</div></section>
 
 <section class="section-tight bg-teal"><div class="wrap banner">
   <h2>Your VA Benefit Can Do <em>More</em> Than You Think</h2>
@@ -116,18 +112,6 @@ function home() {
   <div class="grid grid-2" style="margin-top:2rem">
     <div class="photo-card">${img('team-office', 'The Heichel Team standing outside their Fairway Home Mortgage office in Austin, MN', { w: 700, h: 525 })}<a class="btn btn-gold" href="/team">Meet the Team</a></div>
     <div class="photo-card">${img('house-stone', 'Two-story stone and siding home with a three-car garage', { w: 700, h: 525 })}${apply('Start Your Application', 'btn-teal')}</div>
-  </div>
-</div></section>
-
-<section class="section bg-teal"><div class="wrap split">
-  ${img('hidden-market', 'The Hidden Market: Understanding Reverse Mortgages course cover, hosted by Agent Excel', { cls: 'rounded', w: 600, h: 338 })}
-  <div>
-    <h2>The Hidden Market</h2>
-    <span class="eyebrow">Understanding Reverse Mortgages | 3 MN Realtor CE Credits</span>
-    <p><strong>Realtors: your next opportunity may already be in your database.</strong></p>
-    <p>Discover another strategy for creating possibilities when traditional financing may not be the best fit. This 3-credit Minnesota CE course will help you understand how reverse mortgages can open new conversations with past clients, buyers and sellers, and give you another valuable tool for your real estate business.</p>
-    <p class="eyebrow">Taught by Kelly Kelly | Hosted by Agent Excel<br>$10 registration | 3 MN CE credits</p>
-    <a class="btn btn-gold" href="${SITE.links.hiddenMarketClass}" target="_blank" rel="noopener">Register for the Class</a>
   </div>
 </div></section>
 
@@ -283,7 +267,7 @@ ${breadcrumbs(crumbs)}<span class="eyebrow">About us</span><h1>Meet Our Team</h1
     <p>Whether you’re a first-time buyer, using MN Housing assistance, a veteran exploring VA benefits, or planning your next move, we make the process simple, clear and stress-free from application to closing.</p>
     <p>Our team specializes in low down payment options, down payment assistance programs, and strategic financing solutions like rate buydowns and bridge loans. We’ll walk you through your options so you understand exactly what’s possible and what it takes to get there.</p>
     <p><strong>What sets us apart?</strong> Local expertise, fast closings, and a team that actually answers the phone. We keep you and your agent informed every step of the way so there are no surprises. We don’t just close loans. We help you move forward with confidence.</p>
-    <div class="btn-row"><a class="btn btn-teal" href="/quiz">Take the 60-Second Quiz</a><a class="btn btn-outline" href="/schedule">Talk with Kris</a></div>
+    <div class="btn-row"><a class="btn btn-teal" href="/schedule">Talk with Kris</a><a class="btn btn-outline" href="/loan-programs">See Loan Programs</a></div>
   </div>
 </div></section>
 <section class="section bg-mist-soft"><div class="wrap split">
@@ -411,7 +395,7 @@ function realtors() {
     <p>Our tailored mortgage solutions include exclusive rates, fast-track pre-approvals, and flexible financing options that fit every client’s unique goals. Plus, our technology provides real-time market insights, secure document sharing and seamless communication, keeping every transaction efficient and stress-free.</p>
     <p>Join forces with us to access the resources, expertise and personalized support that help you stand out in today’s competitive market. Your success is our mission, and together, we’ll raise the standard for real estate excellence.</p>
     <h2 class="label">What agents get</h2>
-    <ul class="checks"><li>Fast-track pre-approvals, including weekends</li><li>Proactive updates to you and your buyer from application to closing</li><li>Closings often in 10 days or less</li><li>Specialty programs: VA renovation, HomeStyle®, 203(k), HECM for Purchase, DPA, DSCR</li><li>Co-marketing materials and Minnesota CE classes like “The Hidden Market”</li></ul>
+    <ul class="checks"><li>Fast-track pre-approvals, including weekends</li><li>Proactive updates to you and your buyer from application to closing</li><li>Closings often in 10 days or less</li><li>Specialty programs: VA renovation, HomeStyle®, 203(k), HECM for Purchase, DPA, DSCR</li><li>Co-marketing materials for you and your listings</li></ul>
     <div class="btn-row"><a class="btn btn-gold" href="#contact">Request Marketing Materials</a><a class="btn btn-outline" href="${SITE.links.agentHandbook}" target="_blank" rel="noopener">Download the Agent Handbook</a></div>
   </div>
   ${img('kris-portrait', 'Kris Heichel, loan officer and Realtor partner', { cls: 'rounded shadow', w: 500, h: 500 })}
@@ -473,9 +457,9 @@ function education() {
   ];
   const tools = [
     ['/loan-process', 'Our 9-Step Loan Process', 'What to expect from first conversation to moving day.'],
-    ['/quiz', 'Homebuyer Readiness Quiz', 'See where you stand in about 60 seconds.'],
-    ['/refi-quiz', 'Refinance Quiz', 'Find out if refinancing makes sense now.'],
-    ['/iq', 'Financial IQ Quiz', 'Gauge your financial health and next steps.'],
+    ['/loan-programs', 'Compare Loan Programs', 'See every program side by side.'],
+    ['/refi1', 'Refi Watchlist', 'Get notified when rates drop enough to refinance.'],
+    ['/schedule', 'Free Consultation', 'Get a personalized plan from Kris and the team.'],
     ['/equity-analysis-plan', 'Home Equity Analysis', 'See how much equity you could put to work.'],
     ['/va-benefits', 'VA Benefits Guide', 'What your VA benefit can really do.'],
   ];
@@ -490,7 +474,11 @@ function education() {
   ${POSTS.map(postCard).join('')}
   <p style="margin-top:1.5rem"><a class="btn btn-outline" href="/blog">View all articles</a></p>
 </div></section>
-<section class="section-tight"><div class="wrap">${quiz('purchase', { heading: 'Take the First Step', sub: 'Start on the path to owning a home by taking our simple quiz.' })}</div></section>
+<section class="section bg-mist-soft" id="first-time-buyers"><div class="wrap">
+  <h2>First-Time Homebuyer Tips</h2><p class="lede">Navigating the home-buying process for the first time can be overwhelming. Here are some essential tips to get you started on the right foot.</p>
+  ${tipCards(FIRST_TIME_TIPS)}
+  <div class="btn-row"><a class="btn btn-teal" href="/schedule">Take the First Step</a></div>
+</div></section>
 <section class="section bg-mist"><div class="wrap wrap-narrow">
   <div class="center"><h2>Have a Mortgage Question?</h2><p class="lede">We have the answers you need.</p></div>
   ${faqList(EDU_FAQS, { cols: 1 })}
@@ -498,7 +486,7 @@ function education() {
   return page({
     path: '/education',
     title: 'Mortgage Education, Guides & Blog | The Heichel Team',
-    description: 'Mortgage education from The Heichel Team: loan process guide, homebuyer and refinance quizzes, VA benefits, renovation loan guides, and answers to common mortgage questions.',
+    description: 'Mortgage education from The Heichel Team: loan process guide, first-time homebuyer tips, VA benefits, renovation loan guides, and answers to common mortgage questions.',
     body,
     crumbs,
     schema: [faqSchema(EDU_FAQS)],
@@ -542,88 +530,22 @@ function loanProcess() {
   });
 }
 
-/* ================= Quizzes & lead tools ================= */
-function quizPage({ path, crumbs, eyebrow, title, quizId, hero, tipsTitle, tipsIntro, tips, faqs, faqTitle, metaTitle, description }) {
-  const body = `<section class="page-hero page-hero-photo" style="background-image:url('/img/${hero}.webp')"><div class="wrap split" style="padding-top:10px;padding-bottom:10px">
-  <div>${breadcrumbs(crumbs)}<span class="eyebrow">${eyebrow}</span><h1>${title}</h1>
-  <ul class="quiz-badges" style="color:#fff"><li>Instant results</li><li>Takes 3 minutes</li><li>No credit pull</li></ul></div>
-  ${quiz(quizId, { light: true })}
-</div></section>
-<section class="section"><div class="wrap">
-  <h2>${tipsTitle}</h2><p class="lede">${tipsIntro}</p>
-  <div class="grid grid-4" style="margin-top:1.5rem">${tips.map(([h, t], i) => `<div class="card"><h3>${i + 1}. ${h}</h3><p>${t}</p></div>`).join('')}</div>
-</div></section>
-<section class="section bg-mist"><div class="wrap wrap-narrow">
-  <div class="center"><h2>${faqTitle}</h2><p class="lede">We have the answers you need.</p></div>
-  ${faqList(faqs, { cols: 1 })}
-  <p class="center" style="margin-top:2rem">Didn’t find your answer? Reach out to us, we’re happy to help.</p>
-  <p class="center"><a class="btn btn-teal" href="/schedule">Book a Call</a></p>
-</div></section>`;
-  return page({ path, title: metaTitle, description, body, crumbs, ogImage: hero, schema: [faqSchema(faqs)] });
-}
+/* ================= Lead tools ================= */
+const FIRST_TIME_TIPS = [
+  ['Start by setting a budget', 'Before you fall in love with a home, know what you can realistically afford. Factor in your down payment, monthly payments and lifestyle. A clear budget keeps your search focused and stress-free.'],
+  ['Get pre-approved for a mortgage', 'Pre-approval isn’t just a formality; it’s your first step to becoming a serious buyer. It shows sellers you’re ready and gives you a clear picture of your loan options and price range.'],
+  ['Research neighborhoods', 'Take time to explore different areas, commute times, school ratings and local amenities to make sure the neighborhood fits your lifestyle.'],
+  ['Work with a real estate agent', 'A great agent is your guide, advocate and negotiator. They know the market, help you avoid costly mistakes, and make the process smoother from start to finish.'],
+];
 
-function purchaseQuiz() {
-  return quizPage({
-    path: '/quiz',
-    crumbs: [['Education', '/education'], ['Homebuyer Quiz', '/quiz']],
-    eyebrow: 'Purchasing',
-    title: 'Take the First Step Towards Owning Your Dream Home',
-    quizId: 'purchase',
-    hero: 'quiz-hero',
-    tipsTitle: 'First-Time Homebuyer Tips',
-    tipsIntro: 'Navigating the home-buying process for the first time can be overwhelming. Here are some essential tips to get you started on the right foot.',
-    tips: [
-      ['Start by setting a budget', 'Before you fall in love with a home, know what you can realistically afford. Factor in your down payment, monthly payments and lifestyle. A clear budget keeps your search focused and stress-free.'],
-      ['Get pre-approved for a mortgage', 'Pre-approval isn’t just a formality; it’s your first step to becoming a serious buyer. It shows sellers you’re ready and gives you a clear picture of your loan options and price range.'],
-      ['Research neighborhoods', 'Take time to explore different areas, commute times, school ratings and local amenities to make sure the neighborhood fits your lifestyle.'],
-      ['Work with a real estate agent', 'A great agent is your guide, advocate and negotiator. They know the market, help you avoid costly mistakes, and make the process smoother from start to finish.'],
-    ],
-    faqTitle: 'Have a Mortgage Question?',
-    faqs: EDU_FAQS,
-    metaTitle: 'Homebuyer Readiness Quiz | Are You Ready to Buy? | The Heichel Team',
-    description: 'Take our free 3-minute homebuyer readiness quiz. No credit pull, instant results, and loan programs matched to your situation, plus first-time homebuyer tips.',
-  });
-}
+const REFI_TIPS = [
+  ['Know your goal', 'Are you trying to lower your payment, shorten your loan term, or tap into equity? Get clear on your goal so you can choose the right refinance option.'],
+  ['Find a lender to work with', 'Not all lenders are the same. Look for someone who listens, explains your options, and has your best interest in mind, not just the lowest advertised rate.'],
+  ['Prepare your documentation', 'Speed things up by gathering your income, asset and debt information ahead of time. The more organized you are, the smoother the process.'],
+  ['Ask questions', 'Never be afraid to speak up. A good lender will walk you through the numbers, explain the fine print, and make sure you feel confident every step of the way.'],
+];
 
-function refiQuiz() {
-  return quizPage({
-    path: '/refi-quiz',
-    crumbs: [['Education', '/education'], ['Refinance Quiz', '/refi-quiz']],
-    eyebrow: 'Refinancing',
-    title: 'Are You Ready to Take the First Step Towards Refinancing Your Home?',
-    quizId: 'refi',
-    hero: 'refi-hero',
-    tipsTitle: 'Refinancing Tips',
-    tipsIntro: 'Refinancing can be a smart way to lower your monthly payment, shorten your loan term, remove mortgage insurance or access cash for big expenses.',
-    tips: [
-      ['Know your goal', 'Are you trying to lower your payment, shorten your loan term, or tap into equity? Get clear on your goal so you can choose the right refinance option.'],
-      ['Find a lender to work with', 'Not all lenders are the same. Look for someone who listens, explains your options, and has your best interest in mind, not just the lowest advertised rate.'],
-      ['Prepare your documentation', 'Speed things up by gathering your income, asset and debt information ahead of time. The more organized you are, the smoother the process.'],
-      ['Ask questions', 'Never be afraid to speak up. A good lender will walk you through the numbers, explain the fine print, and make sure you feel confident every step of the way.'],
-    ],
-    faqTitle: 'Have a Refinance Question?',
-    faqs: REFI_FAQS,
-    metaTitle: 'Refinance Quiz | Should I Refinance My Mortgage? | The Heichel Team',
-    description: 'Find out in 3 minutes if refinancing makes sense: lower your payment, pay off faster, remove PMI or cash out equity. No credit pull. Plus refinancing tips and FAQs.',
-  });
-}
-
-function iq() {
-  const crumbs = [['Education', '/education'], ['Financial IQ Quiz', '/iq']];
-  const body = `${pageHero({ title: 'What’s Your Financial IQ?', crumbs, lede: 'Answer a few simple questions and instantly see how your financial health stacks up, plus the next steps that would make the biggest difference.' })}
-<section class="section"><div class="wrap split">
-  ${quiz('iq', { light: true })}
-  ${img('iq-graphic', 'Illustration of a woman saving money in a piggy bank', { cls: 'rounded', w: 500, h: 534 })}
-</div></section>`;
-  return page({
-    path: '/iq',
-    title: 'What Is Your Financial IQ? Free Quick Quiz | The Heichel Team',
-    description: 'Take a quick, free Financial IQ quiz to see how your credit, debt and savings stack up for buying a home, with personalized next steps. No credit pull.',
-    body,
-    crumbs,
-    ogImage: 'iq-graphic',
-  });
-}
+const tipCards = (tips) => `<div class="grid grid-4" style="margin-top:1.5rem">${tips.map(([h, t], i) => `<div class="card"><h3>${i + 1}. ${h}</h3><p>${t}</p></div>`).join('')}</div>`;
 
 function vaBenefits() {
   const crumbs = [['Education', '/education'], ['VA Benefits', '/va-benefits']];
@@ -665,7 +587,11 @@ ${breadcrumbs(crumbs)}<span class="eyebrow">A benefit you’ve earned — and ma
     <ul class="checks"><li>Full scope of VA loan options, including renovation financing</li><li>Plain-language guidance through complex VA guidelines</li><li>Determine if a VA renovation loan fits your property and goals</li><li>Navigate from start to close with confidence</li></ul>
     <p><strong>No pressure. No jargon.</strong></p>
   </div>
-  ${quiz('va', { light: true, heading: 'Thinking About Buying a House?', sub: 'Take our 3-minute quiz to see if you are eligible for a VA loan.' })}
+  <div class="card card-teal">
+    <h3>Thinking About Buying a House?</h3>
+    <p>VA loans are available to veterans, active-duty service members, National Guard and Reserve members, and eligible surviving spouses. We can pull your Certificate of Eligibility in minutes and show you what your benefit can do.</p>
+    <div class="btn-row"><a class="btn btn-gold" href="/schedule">Check My Eligibility</a><a class="btn btn-ghost" href="tel:${SITE.phoneE164}">Call ${SITE.phone}</a></div>
+  </div>
 </div></section>
 <section class="section bg-mist"><div class="wrap wrap-narrow center">
   <span class="eyebrow">Ready to see what your benefit can really do?</span>
@@ -729,7 +655,14 @@ function refiWatch() {
     { name: 'current_rate', label: 'Current Rate', type: 'select', options: RATE_OPTIONS, required: true },
   ], { submit: 'Join The List', btnClass: 'btn-gold', note: 'By submitting your contact information you agree to be contacted by The Heichel Team.' })}</div>
 </div></section>
-<section class="section"><div class="wrap wrap-narrow">${faqList(REFI_FAQS, { cols: 1 })}</div></section>`;
+<section class="section"><div class="wrap">
+  <h2>Refinancing Tips</h2><p class="lede">Refinancing can be a smart way to lower your monthly payment, shorten your loan term, remove mortgage insurance or access cash for big expenses.</p>
+  ${tipCards(REFI_TIPS)}
+</div></section>
+<section class="section bg-mist"><div class="wrap wrap-narrow">
+  <div class="center"><h2>Have a Refinance Question?</h2><p class="lede">We have the answers you need.</p></div>
+  ${faqList(REFI_FAQS, { cols: 1 })}
+</div></section>`;
   return page({
     path: '/refi1',
     title: 'Refi Watch List | Get Notified When Rates Drop | The Heichel Team',
@@ -837,19 +770,8 @@ function post(p) {
 }
 
 /* ================= Utility pages ================= */
-// Static copies of the JS-rendered quiz forms so Netlify Forms registers their fields at deploy time.
-const QUIZ_FORMS = {
-  'quiz-purchase': ['buying', 'first_time', 'timeline', 'credit', 'down', 'military'],
-  'quiz-refinance': ['current_rate', 'goal', 'credit', 'stay'],
-  'quiz-financial-iq': ['credit', 'dti', 'savings', 'prequal', 'pmi'],
-  'quiz-va': ['status', 'used_before', 'goal', 'timeline'],
-};
-const quizFormStubs = () => Object.entries(QUIZ_FORMS)
-  .map(([n, f]) => `<form name="${n}" data-netlify="true" hidden>${['name', 'email', 'phone', 'page', ...f].map((x) => `<input name="${x}">`).join('')}</form>`)
-  .join('');
-
 function thankYou() {
-  const body = `${quizFormStubs()}${pageHero({ title: 'Thank You!', lede: 'We received your information and someone from The Heichel Team will be in touch shortly. Need us sooner? Call <a href="tel:' + SITE.phoneE164 + '">' + SITE.phone + '</a>.' })}
+  const body = `${pageHero({ title: 'Thank You!', lede: 'We received your information and someone from The Heichel Team will be in touch shortly. Need us sooner? Call <a href="tel:' + SITE.phoneE164 + '">' + SITE.phone + '</a>.' })}
 <section class="section"><div class="wrap center"><div class="btn-row">${apply()}<a class="btn btn-teal" href="/">Back to Home</a></div></div></section>`;
   return page({ path: '/thank-you', title: 'Thank You | The Heichel Team', description: 'Thanks for contacting The Heichel Team.', body }).replace('index, follow', 'noindex, follow');
 }
@@ -871,9 +793,6 @@ export function allPages() {
     { path: '/why-fairway', html: whyFairway() },
     { path: '/education', html: education() },
     { path: '/loan-process', html: loanProcess() },
-    { path: '/quiz', html: purchaseQuiz() },
-    { path: '/refi-quiz', html: refiQuiz() },
-    { path: '/iq', html: iq() },
     { path: '/va-benefits', html: vaBenefits() },
     { path: '/equity-analysis-plan', html: equity() },
     { path: '/refi1', html: refiWatch() },

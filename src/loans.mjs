@@ -283,7 +283,6 @@ export const LOANS = [
     highlights: ['No required monthly mortgage payment', 'Stay on title and keep ownership of your home', 'Use HECM for Purchase to rightsize into a home that fits retirement', 'Funds can be received as a lump sum, monthly payments, a line of credit or a combination', 'FHA-insured protections, including non-recourse terms'],
     sections: [
       ['HECM for Purchase', 'Rightsizing into a single-level home or moving closer to family? HECM for Purchase lets you combine a down payment, often from the sale of your current home, with a reverse mortgage to buy your next home outright with no monthly mortgage payment.'],
-      ['Realtors: The Hidden Market', 'Reverse mortgages can open new conversations with past clients, buyers and sellers. Ask about our 3-credit Minnesota CE course, “The Hidden Market: Understanding Reverse Mortgages.”'],
     ],
     faqs: [
       ['Who qualifies for a reverse mortgage?', 'Homeowners age 62 or older who live in the home as their primary residence, have significant equity, and can keep paying property taxes, insurance and upkeep.'],
