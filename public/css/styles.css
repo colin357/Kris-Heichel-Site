@@ -389,7 +389,13 @@ ul, ol { padding-left: 1.25em; }
 .icon-badge .icon { width: 26px; height: 26px; }
 
 /* ===== Home hero (Kris-first) ===== */
-.hero-k { background: radial-gradient(1200px 500px at 85% 0%, var(--sand) 0%, transparent 60%), var(--paper); overflow: hidden; }
+.hero-k { position: relative; overflow: hidden; background-size: cover; background-position: center; }
+.hero-k::before { content: ''; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.85) 55%, rgba(255,255,255,.55) 100%); }
+.hero-k > * { position: relative; }
+.stats { display: grid; grid-template-columns: repeat(5, 1fr); gap: 16px; padding: 8px 20px 40px; list-style: none; margin: 0 auto; }
+.stats li { text-align: center; font-family: var(--font-label); letter-spacing: .05em; color: var(--teal); font-size: 1.05rem; line-height: 1.25; text-transform: uppercase; }
+.stats strong { display: block; font-size: 2rem; color: var(--teal-dark); font-weight: 400; }
+@media (max-width: 960px) { .stats { grid-template-columns: repeat(2, 1fr); } }
 .hero-k-inner { display: grid; grid-template-columns: 1.1fr .9fr; gap: clamp(32px, 5vw, 72px); align-items: center; padding-top: clamp(40px, 6vw, 80px); padding-bottom: clamp(40px, 6vw, 72px); }
 .hero-k h1 { font-size: clamp(2.4rem, 5.2vw, 4.1rem); line-height: 1.05; margin-bottom: .4em; }
 .hero-k .lede { color: var(--ink); font-size: clamp(1.1rem, 1.6vw, 1.3rem); }
@@ -411,14 +417,6 @@ ul, ol { padding-left: 1.25em; }
   .hero-k-photo::before { inset: 14px -8px -10px 14px; }
 }
 
-/* ===== Stats band ===== */
-.stats-band { background: var(--teal); color: #fff; }
-.stats-k { list-style: none; margin: 0 auto; display: grid; grid-template-columns: repeat(5, 1fr); gap: 20px; padding-top: 30px; padding-bottom: 30px; }
-.stats-k li { display: grid; grid-template-columns: auto 1fr; column-gap: 12px; align-items: center; }
-.stats-k .icon { grid-row: span 2; color: var(--gold); width: 30px; height: 30px; }
-.stats-k strong { font-family: var(--font-head); font-weight: 400; font-size: 1.6rem; line-height: 1.1; }
-.stats-k span { font-size: .9rem; color: rgba(255,255,255,.82); }
-@media (max-width: 960px) { .stats-k { grid-template-columns: repeat(2, 1fr); } }
 
 /* ===== Goal cards ===== */
 .goal-k { display: flex; gap: 16px; align-items: flex-start; padding: 24px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); text-decoration: none; color: var(--ink); box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s, border-color .2s; }

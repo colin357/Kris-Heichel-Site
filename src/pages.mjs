@@ -60,16 +60,9 @@ function home() {
     ['coins', 'Tap Your Equity', 'Put your home’s value to work without selling.', '/equity-analysis-plan'],
     ['sun', 'Rightsize in Retirement', 'Reverse mortgages and HECM for Purchase for homeowners 62+.', '/reverse-purchase'],
   ];
-  const stats = [
-    ['users', '2,000+', 'families helped'],
-    ['coins', '$750M+', 'in funded loans'],
-    ['clock', '10 days', 'closings, often'],
-    ['star', fmtAvg(REVIEW_DATA.average) + '★', fmtCount(REVIEW_DATA.total) + ' reviews'],
-    ['award', 'Top 1%', 'Scotsman Guide'],
-  ];
   const faqs = [...HOME_FAQS, ...MN_FAQS];
   const body = `
-<section class="hero-k">
+<section class="hero-k" style="background-image:url('/img/hero-house.webp')">
   <div class="wrap hero-k-inner">
     <div class="hero-k-copy">
       <span class="eyebrow">Kris Heichel · Branch Manager · NMLS #${SITE.nmls}</span>
@@ -88,11 +81,16 @@ function home() {
       <figcaption class="hero-badge">${icon('pin')}<span>Rochester &amp; Austin offices<br><a href="tel:${SITE.phoneE164}">${SITE.phone}</a></span></figcaption>
     </figure>
   </div>
+  <ul class="stats wrap" aria-label="By the numbers">
+    <li>Funded over<strong>$100 million</strong>in home loans</li>
+    <li>Helped<strong>500+ families</strong>achieve homeownership</li>
+    <li>Closed<strong>200+ loans</strong>in a single year</li>
+    <li>Maintained a<strong>95%+</strong>on-time closing rate</li>
+    <li>Ranked in the<strong>Top 1%</strong>of loan officers nationally</li>
+  </ul>
 </section>
 
-<section class="stats-band" aria-label="By the numbers"><ul class="wrap stats-k">
-  ${stats.map(([i, n, l]) => `<li>${icon(i)}<strong>${n}</strong><span>${l}</span></li>`).join('')}
-</ul></section>
+
 
 <section class="section"><div class="wrap">
   <div class="section-head"><span class="eyebrow">How we can help</span><h2>What are you hoping to do?</h2></div>
