@@ -418,13 +418,16 @@ ul, ol { padding-left: 1.25em; }
 }
 
 
-/* ===== Goal cards ===== */
-.goal-k { display: flex; gap: 16px; align-items: flex-start; padding: 24px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); text-decoration: none; color: var(--ink); box-shadow: var(--shadow-sm); transition: transform .2s, box-shadow .2s, border-color .2s; }
-.goal-k:hover { transform: translateY(-3px); box-shadow: var(--shadow); border-color: var(--gold); color: var(--ink); }
-.goal-k strong { display: block; font-family: var(--font-head); font-weight: 400; font-size: 1.25rem; color: var(--teal); margin-bottom: 4px; }
-.goal-k span span { color: var(--muted); font-size: .97rem; line-height: 1.55; display: block; }
-.goal-arrow { margin-left: auto; color: var(--gold-text); align-self: center; transition: transform .2s; }
-.goal-k:hover .goal-arrow { transform: translateX(4px); }
+/* ===== Goal cards (original photo-tile layout) ===== */
+.grid-6 { grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 24px; }
+@media (max-width: 1080px) { .grid-6 { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+@media (max-width: 620px) { .grid-6 { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; } }
+.goal-card { text-decoration: none; color: inherit; display: flex; flex-direction: column; }
+.goal-card img { border-radius: 6px; aspect-ratio: 1; object-fit: cover; width: 100%; margin-bottom: 14px; transition: transform .25s; }
+.goal-card:hover img { transform: scale(1.03); }
+.goal-card .label { display: block; font-size: 1.35rem; line-height: 1.1; color: var(--ink); }
+.goal-card .goal-desc { display: block; font-size: .92rem; line-height: 1.5; color: var(--muted); margin-top: 6px; flex: 1; }
+.goal-card .more { font-size: .95rem; }
 
 /* ===== Photos ===== */
 .photo-frame { margin: 0; }

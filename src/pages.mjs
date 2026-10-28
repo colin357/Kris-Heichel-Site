@@ -53,12 +53,12 @@ const REFI_FAQS = [
 /* ================= Home ================= */
 function home() {
   const goals = [
-    ['key', 'Buy Your First Home', 'Low-down-payment loans, Minnesota Housing and down payment help.', '/dpa'],
-    ['flag', 'Use Your VA Benefit', 'Zero down, no PMI, and VA renovation loans most lenders don’t offer.', '/va-benefits'],
-    ['hammer', 'Buy and Renovate', 'Finance the home and the updates in one loan.', '/renovation'],
-    ['percent', 'Refinance or Drop PMI', 'Lower your payment, shorten your term or remove mortgage insurance.', '/refi1'],
-    ['coins', 'Tap Your Equity', 'Put your home’s value to work without selling.', '/equity-analysis-plan'],
-    ['sun', 'Rightsize in Retirement', 'Reverse mortgages and HECM for Purchase for homeowners 62+.', '/reverse-purchase'],
+    ['help-purchase', 'Brick home with an arched front entry', 'Buy Your First Home', 'Low-down-payment loans, Minnesota Housing and down payment help.', '/dpa'],
+    ['loan-va', 'Hand holding a small American flag outside a home', 'Use Your VA Benefit', 'Zero down, no PMI, and VA renovation loans most lenders don’t offer.', '/va-benefits'],
+    ['loan-renovation', 'Contractors renovating the exterior of a house', 'Buy and Renovate', 'Finance the home and the updates in one loan.', '/renovation'],
+    ['help-pmi', 'Living room with large windows', 'Refinance or Drop PMI', 'Lower your payment, shorten your term or remove mortgage insurance.', '/refi1'],
+    ['help-equity', 'Bright open-concept kitchen', 'Tap Your Equity', 'Put your home’s value to work without selling.', '/equity-analysis-plan'],
+    ['help-payoff', 'Cozy living room with a fireplace', 'Rightsize in Retirement', 'Reverse mortgages and HECM for Purchase for homeowners 62+.', '/reverse-purchase'],
   ];
   const faqs = [...HOME_FAQS, ...MN_FAQS];
   const body = `
@@ -93,8 +93,8 @@ function home() {
 
 
 <section class="section"><div class="wrap">
-  <div class="section-head"><span class="eyebrow">How we can help</span><h2>What are you hoping to do?</h2></div>
-  <div class="grid grid-3 goal-grid">${goals.map(([i, t, d, h]) => `<a class="goal-k" href="${h}"><span class="icon-badge">${icon(i)}</span><span><strong>${t}</strong><span>${d}</span></span>${icon('arrow', { cls: 'icon goal-arrow' })}</a>`).join('')}</div>
+  <span class="eyebrow">How we can help</span><h2>What are you hoping to do?</h2><hr class="rule">
+  <div class="grid grid-6">${goals.map(([im, alt, t, d, h]) => `<a class="goal-card" href="${h}">${img(im, alt, { w: 300, h: 300 })}<span class="label">${t}</span><span class="goal-desc">${d}</span><span class="more">Let’s Go</span></a>`).join('')}</div>
 </div></section>
 
 <section class="section bg-sand"><div class="wrap split">
