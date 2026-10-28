@@ -68,7 +68,7 @@ Pages are written as `slug.html`, which these hosts serve at `/slug`. That keeps
 
 ## Design system
 
-Warm off-white pages (`--paper`), one sand alternate section (`.bg-sand`), teal for emphasis and gold accents. Icons come from `icon('name')` in `src/icons.mjs`. Local photos are real Southeast Minnesota scenes from Wikimedia Commons (CC0 / CC BY / CC BY-SA, credited on `/photo-credits` and in captions); the AI-generated house images were removed.
+Warm off-white pages (`--paper`), one sand alternate section (`.bg-sand`), teal for emphasis and gold accents. Icons come from `icon('name')` in `src/icons.mjs`. Local photos are real Southeast Minnesota scenes from Wikimedia Commons (CC0 / CC BY / CC BY-SA, credited on `/photo-credits` and in captions); the AI-generated house images were removed, except the faded hero background. The six homepage goal tiles (`goal-*.webp`) are Pexels photos (free license, no credit required), cropped square with one shared warm color grade.
 
 ## Things to confirm with the client
 

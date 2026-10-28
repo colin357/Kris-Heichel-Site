@@ -53,12 +53,12 @@ const REFI_FAQS = [
 /* ================= Home ================= */
 function home() {
   const goals = [
-    ['goal-first-home', 'Brick home with an arched front entry', 'Buy Your First Home', 'Low-down-payment loans, Minnesota Housing and down payment help.', '/dpa'],
-    ['goal-va', 'Craftsman-style home with wood and stone accents', 'Use Your VA Benefit', 'Zero down, no PMI, and VA renovation loans most lenders don’t offer.', '/va-benefits'],
-    ['goal-renovate', 'Stone and brick home with a covered front porch', 'Buy and Renovate', 'Finance the home and the updates in one loan.', '/renovation'],
-    ['goal-refinance', 'Two-story home with a stone front and wood garage doors', 'Refinance or Drop PMI', 'Lower your payment, shorten your term or remove mortgage insurance.', '/refi1'],
-    ['goal-equity', 'Gabled family home with a three-car garage', 'Tap Your Equity', 'Put your home’s value to work without selling.', '/equity-analysis-plan'],
-    ['goal-retirement', 'Covered front entry with stone steps and potted plants', 'Rightsize in Retirement', 'Reverse mortgages and HECM for Purchase for homeowners 62+.', '/reverse-purchase'],
+    ['goal-first-home', 'Smiling couple holding the keys outside their new home with a sold sign', 'Buy Your First Home', 'Low-down-payment loans, Minnesota Housing and down payment help.', '/dpa'],
+    ['goal-va', 'Service member in uniform hugging his family at home', 'Use Your VA Benefit', 'Zero down, no PMI, and VA renovation loans most lenders don’t offer.', '/va-benefits'],
+    ['goal-renovate', 'Couple painting a room together during a home renovation', 'Buy and Renovate', 'Finance the home and the updates in one loan.', '/renovation'],
+    ['goal-refinance', 'Couple reviewing their mortgage numbers at the kitchen table', 'Refinance or Drop PMI', 'Lower your payment, shorten your term or remove mortgage insurance.', '/refi1'],
+    ['goal-equity', 'Modest single-story ranch home with a front lawn', 'Tap Your Equity', 'Put your home’s value to work without selling.', '/equity-analysis-plan'],
+    ['goal-retirement', 'Older couple chatting on the front steps of their home', 'Rightsize in Retirement', 'Reverse mortgages and HECM for Purchase for homeowners 62+.', '/reverse-purchase'],
   ];
   const faqs = [...HOME_FAQS, ...MN_FAQS];
   const body = `
