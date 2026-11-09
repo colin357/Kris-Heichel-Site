@@ -34,7 +34,7 @@ To add a blog post, add an object to `POSTS` in `src/blog.mjs` and rebuild. Do t
 ## Deploying
 
 - **Netlify**: connect the repo. `netlify.toml` sets the build and redirects. Forms work automatically through Netlify Forms; turn on email notifications in the Netlify dashboard.
-- **Vercel**: connect the repo. `vercel.json` sets the build, clean URLs and redirects. Forms need an endpoint: set the `FORM_ENDPOINT` env var (for example, a Formspree form URL).
+- **Vercel**: connect the repo. `vercel.json` sets the build, clean URLs and redirects. Netlify Forms does not exist here: leads go to Salesforce (below), and for email notifications too set the `FORM_ENDPOINT` env var (for example, a Formspree form URL).
 - **Other hosts**: run `FORM_ENDPOINT=https://formspree.io/f/xxxx npm run build` and upload `dist/`.
 
 ### Sending leads to Kris's Jungo / Salesforce CRM

@@ -51,6 +51,8 @@ export const SITE = {
   // Also send every lead to Kris's Jungo/Salesforce CRM (via /api/lead) when SALESFORCE_ORG_ID is set
   // on the host. See src/crm.mjs.
   crmEnabled: Boolean(process.env.SALESFORCE_ORG_ID),
+  // Netlify Forms only exists on Netlify; elsewhere forms post only to formEndpoint and the CRM.
+  netlifyForms: Boolean(process.env.NETLIFY),
   // Date the content was last reviewed; shown on loan pages and emitted as dateModified.
   reviewed: '2026-10-19',
 };

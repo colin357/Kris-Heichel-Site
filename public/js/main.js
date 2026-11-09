@@ -28,10 +28,12 @@
   });
 
   /* ---------- Forms ---------- */
-  // Posts to SITE_FORM_ENDPOINT when set (Formspree etc.), otherwise to "/" for Netlify Forms.
+  // Posts to SITE_FORM_ENDPOINT when set (Formspree etc.), otherwise to "/" for Netlify Forms
+  // (only on Netlify). Resolves null when there is no email destination.
   function submitData(formName, data) {
     var endpoint = window.SITE_FORM_ENDPOINT;
     data.set('form-name', formName);
+    if (!endpoint && !window.SITE_NETLIFY_FORMS) return Promise.resolve(null);
     if (endpoint) {
       return fetch(endpoint, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
     }
