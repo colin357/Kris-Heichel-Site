@@ -334,7 +334,7 @@ ${header(path)}
 ${body}
 </main>
 ${footer()}
-<script>window.SITE_FORM_ENDPOINT=${JSON.stringify(SITE.formEndpoint)};</script>
+<script>window.SITE_FORM_ENDPOINT=${JSON.stringify(SITE.formEndpoint)};window.SITE_CRM=${SITE.crmEnabled};</script>
 <script src="/js/main.js" defer></script>
 </body>
 </html>

@@ -37,6 +37,21 @@ To add a blog post, add an object to `POSTS` in `src/blog.mjs` and rebuild. Do t
 - **Vercel**: connect the repo. `vercel.json` sets the build, clean URLs and redirects. Forms need an endpoint: set the `FORM_ENDPOINT` env var (for example, a Formspree form URL).
 - **Other hosts**: run `FORM_ENDPOINT=https://formspree.io/f/xxxx npm run build` and upload `dist/`.
 
+### Sending leads to Kris's Jungo / Salesforce CRM
+
+Every form also posts to `/api/lead`, a small serverless function (`api/lead.js` on Vercel, `netlify/functions/lead.mjs` on Netlify, shared code in `src/crm.mjs`) that creates a **Lead** in Salesforce through Web-to-Lead. Jungo runs inside Salesforce, so the lead shows up in Jungo. Email notifications keep working as before; a visitor sees "Thank you" if either path accepts the lead.
+
+Set these environment variables on the host, then redeploy (the build only turns the CRM call on when `SALESFORCE_ORG_ID` is set):
+
+| Variable | Value |
+| --- | --- |
+| `SALESFORCE_ORG_ID` | **Required.** Kris's 15-character Org ID (Salesforce Setup → Company Information, or the `oid` value in Setup → Web-to-Lead's generated HTML). |
+| `SALESFORCE_WEBTOLEAD_URL` | Optional. The form `action` URL from Setup → Web-to-Lead, if it isn't `https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8`. |
+| `SALESFORCE_LEAD_SOURCE` | Optional. A Lead Source picklist value; defaults to `Website`. |
+| `SALESFORCE_DEBUG_EMAIL` | Optional, for testing. Salesforce emails the result of each submission here. Remove when done. |
+
+In Salesforce: turn on Web-to-Lead (Setup → Web-to-Lead), pick the default lead creator, and make sure a lead assignment rule or the default owner routes website leads to Kris. If "Require reCAPTCHA" is on for Web-to-Lead, turn it off (the function posts server-side). Name, email, phone and property address map to standard Lead fields; everything else (form name, page, current rate, goal, message) goes into the Lead's Description.
+
 Pages are written as `slug.html`, which these hosts serve at `/slug`. That keeps every original URL working (`/fha`, `/kris`, `/blog/...`).
 
 ## What changed vs. the original
@@ -76,3 +91,4 @@ Warm off-white pages (`--paper`), one sand alternate section (`.bg-sand`), teal 
 - Career start: Experience.com confirms 2004, which the site uses. The footer still says the team has served Minnesota "since 2003".
 - The Agent Handbook PDF (142 MB) is still linked from its current host, because it's too large for the repo. A compressed copy could be self-hosted.
 - The form destination (Netlify Forms or a `FORM_ENDPOINT`) and who receives the notifications.
+- Kris's Salesforce Org ID and Web-to-Lead settings for the Jungo lead sync (see "Sending leads to Kris's Jungo / Salesforce CRM").

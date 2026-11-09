@@ -42,6 +42,14 @@
     });
   }
 
+  // Also sends the lead to Kris's Jungo/Salesforce CRM through /api/lead (see src/crm.mjs).
+  function sendToCrm(formName, data) {
+    if (!window.SITE_CRM) return Promise.resolve(null);
+    var body = new URLSearchParams(data);
+    body.set('form-name', formName);
+    return fetch('/api/lead', { method: 'POST', body: body, keepalive: true }).catch(function () { return null; });
+  }
+
   function wireForm(f) {
     f.addEventListener('submit', function (e) {
       e.preventDefault();
@@ -53,9 +61,12 @@
       btn.disabled = true;
       status.textContent = 'Sending…';
       status.removeAttribute('data-state');
-      submitData(f.getAttribute('name'), data)
-        .then(function (r) {
-          if (!r.ok) throw new Error(r.status);
+      var name = f.getAttribute('name');
+      var crm = sendToCrm(name, data);
+      // The lead counts as received if either the email notification or the CRM accepted it.
+      Promise.all([submitData(name, data).catch(function () { return null; }), crm])
+        .then(function (rs) {
+          if (!rs.some(function (r) { return r && r.ok; })) throw new Error('not sent');
           f.reset();
           status.dataset.state = 'ok';
           status.textContent = 'Thank you! Someone from The Heichel Team will be in touch shortly.';

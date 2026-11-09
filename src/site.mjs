@@ -48,6 +48,9 @@ export const SITE = {
   // Where forms POST. Leave empty on Netlify (Netlify Forms picks them up automatically);
   // otherwise set to a Formspree/Basin/etc. endpoint, e.g. 'https://formspree.io/f/xxxxxxx'.
   formEndpoint: process.env.FORM_ENDPOINT || '',
+  // Also send every lead to Kris's Jungo/Salesforce CRM (via /api/lead) when SALESFORCE_ORG_ID is set
+  // on the host. See src/crm.mjs.
+  crmEnabled: Boolean(process.env.SALESFORCE_ORG_ID),
   // Date the content was last reviewed; shown on loan pages and emitted as dateModified.
   reviewed: '2026-10-19',
 };
