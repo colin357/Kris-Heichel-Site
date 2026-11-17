@@ -583,7 +583,7 @@ ${breadcrumbs(crumbs)}<span class="eyebrow">A benefit you’ve earned — and ma
   </div>
   ${img('va-commitment', 'Fairway American Warrior Initiative: nearly $10 million given since 2016, 450 service dogs placed, 900+ financial grants awarded', { cls: 'rounded shadow', w: 560, h: 560 })}
 </div></section>
-<section class="section bg-teal" style="background:#14294a"><div class="wrap">
+<section class="section bg-teal" style="background:var(--red-dark)"><div class="wrap">
   <span class="eyebrow">Spotlight feature</span>
   <h2>VA Renovation Loans: <span style="color:var(--gold)">Buy It. Fix It. One Loan.</span></h2>
   <p class="lede">Most people know the VA loan for its zero-down purchase benefit. Far fewer know about the VA renovation loan, a program that lets eligible veterans finance both the purchase price and the cost of improvements in a single mortgage. That means you can buy a home that needs updates, roll the renovation costs into your mortgage, and do it all with no down payment and no separate construction loan.</p>

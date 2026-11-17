@@ -319,7 +319,7 @@ export function page({ path, title, description, body, crumbs, schema = [], ogIm
 <meta property="og:url" content="${url}">
 <meta property="og:image" content="${abs(`/img/${ogImage}.webp`)}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="theme-color" content="#12505b">
+<meta name="theme-color" content="#cc0000">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
