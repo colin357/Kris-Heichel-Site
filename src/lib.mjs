@@ -170,7 +170,7 @@ function footer() {
   </div>
   <div class="wrap legal">
     <img class="awards-strip" src="/img/awards-strip.webp" alt="Awards and achievements: Scotsman Guide Top Originator, Best of Mower County, CDLP, Five Star, Minnesota Housing Top Producing Loan Officer and more" loading="lazy" width="520" height="72">
-    <p>© ${new Date().getFullYear()} The Heichel Team, powered by Fairway Independent Mortgage Corporation. All rights reserved.</p>
+    <p>© ${new Date().getFullYear()} The Heichel Team, powered by Fairway Independent Mortgage Corporation. All rights reserved. Designed by <a href="https://ownitsocial.com" target="_blank" rel="noopener">Own It Social</a>.</p>
     <p>This is not an offer to enter into an agreement. Not all customers will qualify. Information, rates and programs are subject to change without notice. All products are subject to credit and property approval. Other restrictions and limitations may apply. Equal Housing Lender. AZ License #${SITE.azLicense}.</p>
     <p>This site is not authorized by the New York State Department of Financial Services. No mortgage solicitation activity or loan applications for properties located in the State of New York can be facilitated through this site.</p>
     <img class="ehl" src="/img/equal-housing.webp" alt="Equal Housing Opportunity" loading="lazy" width="200" height="23">
