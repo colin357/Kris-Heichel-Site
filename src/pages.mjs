@@ -67,7 +67,7 @@ function home() {
     <div class="hero-k-copy">
       <span class="eyebrow">Kris Heichel · Branch Manager · NMLS #${SITE.nmls}</span>
       <h1>Let’s get you home, Southeast&nbsp;Minnesota.</h1>
-      <p class="lede">I’m Kris Heichel. For more than 20 years, my team and I have helped 2,000+ families in Rochester, Austin and across Southeast Minnesota buy, build, renovate and refinance, with straight answers and closings that are often done in 10 days or less.</p>
+      <p class="lede">I’m Kris Heichel. For more than 20 years, my team and I have helped 4,000+ families in Rochester, Austin and across Southeast Minnesota buy, build, renovate and refinance, with straight answers and closings that are often done in 10 days or less.</p>
       <p class="signature" aria-hidden="true">Kris Heichel</p>
       <div class="btn-row">${apply()}<a class="btn btn-outline" href="/schedule">Book a Free Call</a></div>
       <ul class="trust-row">
@@ -82,8 +82,8 @@ function home() {
     </figure>
   </div>
   <ul class="stats wrap" aria-label="By the numbers">
-    <li>Funded over<strong>$100 million</strong>in home loans</li>
-    <li>Helped<strong>500+ families</strong>achieve homeownership</li>
+    <li>Funded over<strong>$720 million</strong>in home loans</li>
+    <li>Helped<strong>4,000+ families</strong>achieve homeownership</li>
     <li>Closed<strong>200+ loans</strong>in a single year</li>
     <li>Maintained a<strong>95%+</strong>on-time closing rate</li>
     <li>Ranked in the<strong>Top 1%</strong>of loan officers nationally</li>
@@ -101,7 +101,7 @@ function home() {
   <div>
     <span class="eyebrow">Rochester’s trusted mortgage team</span>
     <h2>Local people who answer the phone</h2>
-    <p>The Heichel Team, powered by Fairway Home Mortgage, combines hometown service with the strength of a national lender. With <strong>over $750 million in funded loans</strong> and <strong>30+ years of combined experience</strong>, we specialize in VA, FHA, Conventional, Jumbo, renovation and reverse mortgages.</p>
+    <p>The Heichel Team, powered by Fairway Home Mortgage, combines hometown service with the strength of a national lender. With <strong>over $720 million in funded loans</strong> and <strong>30+ years of combined experience</strong>, we specialize in VA, FHA, Conventional, Jumbo, renovation and reverse mortgages.</p>
     <p>We keep you and your agent informed at every step, and we don’t go quiet near the finish line. That’s how we’ve earned a <strong>${fmtAvg(REVIEW_DATA.average)}-star rating across ${fmtCount(REVIEW_DATA.total)} reviews</strong>, one family at a time.</p>
     <div class="btn-row"><a class="btn btn-teal" href="/team">Meet the Team</a><a class="btn btn-outline" href="/kris">Kris’s Story</a></div>
   </div>
